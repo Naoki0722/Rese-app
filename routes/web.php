@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ShopController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ReserveController;
+use App\Http\Controllers\FavoriteController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
