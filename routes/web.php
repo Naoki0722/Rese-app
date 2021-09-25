@@ -20,9 +20,11 @@ use App\Http\Controllers\FavoriteController;
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/', function () {
+    return view('auth.home');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::get('/',[ShopController::class,'index']);
 

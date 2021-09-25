@@ -10,4 +10,9 @@ class Area extends Model
     use HasFactory;
 
     protected $guarded = array('id');
+    protected $fillable = array('area');
+    public function shops()
+    {
+        return $this->hasMany('App\Models\Shop');
+    }
 }

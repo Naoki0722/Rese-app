@@ -18,7 +18,7 @@ class CreateShopsTable extends Migration
             $table->string('shop_name',20);
             $table->integer('area_id');
             $table->integer('category_id');
-            $table->string('overview');
+            $table->text('overview');
             $table->string('img');
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();

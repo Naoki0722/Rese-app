@@ -8,7 +8,7 @@
     <ul class="w-52 h-52 mt-40 ">
       <li class="text-center h-12"><a href="" class="text-blue-600 text-4xl font-medium">Home</a></li>
       <li class="text-center h-12"><a href="/register" class="text-blue-600 text-4xl font-medium">Registration</a></li>
-      <li class="text-center h-12"><a href="login" class="text-blue-600 text-4xl font-medium">Login</a></li>
+      <li class="text-center h-12"><a href="/login" class="text-blue-600 text-4xl font-medium">Login</a></li>
     </ul>
   </div>
   <h1 class="text-blue-600 text-4xl pl-5" :class="isOpen ? 'hidden' : 'block' ">Rese</h1>

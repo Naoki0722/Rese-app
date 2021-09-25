@@ -9,6 +9,8 @@ class Shop extends Model
 {
     use HasFactory;
     protected $guarded = array('id');
+    protected $fillable = array('name','area_id','category_id','overview','img'
+);
     public static $rules = array(
         'name' => 'required',
         'area_id' => 'required',
@@ -27,13 +29,13 @@ class Shop extends Model
         return $this->hasMany('App\Models\Favorite');
     }
 
-    public function areas()
+    public function area()
     {
-        return $this->belongsTo('App\Models\Area');
+        return $this->belongsTo(Area::class);
     }
 
-    public function categories()
+    public function category()
     {
-        return $this->belonsTo('App\Mpdels\Category');
+        return $this->belongsTo(Category::class);
     }
 }
