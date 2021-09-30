@@ -20,6 +20,7 @@ class CreateReservesTable extends Migration
             $table->dateTime('date');
             $table->integer('number_of_people');
             $table->timestamp('created_at')->useCurrent()->nullable();
+            $table->timestamp('updated_at')->useCurrent()->nullable();
         });
     }
 

@@ -9,20 +9,19 @@ class Reserve extends Model
 {
     use HasFactory;
     protected $guarded = array('id');
+    protected $dates = ['date'];
     public static $rules = array(
-        'user_uid' => 'required',
+        'user_id' => 'required',
         'shop_id' => 'required',
-        'date' => 'required',
-        'time' => 'required',
-        'number' => 'required'
+        'number_of_people' => 'required'
     );
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo('App\Models\User');
     }
 
-    public function shops()
+    public function shop()
     {
         return $this->belongsTo('App\Models\Shop');
     }

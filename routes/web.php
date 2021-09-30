@@ -27,4 +27,8 @@ Route::get('/', function () {
 require __DIR__.'/auth.php';
 
 Route::get('/',[ShopController::class,'index']);
+Route::get('/done',function(){
+    return view('auth.done');
+});
+
 

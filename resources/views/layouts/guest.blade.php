@@ -17,20 +17,18 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
+    
     <body>
         <div id="app" class="font-sans text-gray-900 antialiased w-screen h-screen bg-gray-100">
             {{ $slot }}
         </div>
-        
         <script>
           const app = new Vue({
           el: '#app',
           data: {
             isOpen: false,
-          }
+          },
         })
-
-
-</script>
+        </script>
     </body>
 </html>
