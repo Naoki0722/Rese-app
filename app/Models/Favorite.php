@@ -10,7 +10,7 @@ class Favorite extends Model
     use HasFactory;
     protected $guarded = array('id');
     public static $rules = array(
-        'user_uid' => 'required',
+        'user_id' => 'required',
         'shop_id' => 'required',
     );
 

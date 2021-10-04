@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ReserveController;
+use App\Http\Controllers\FavoriteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
@@ -70,3 +71,9 @@ Route::get('/datail/:{id}',[ShopController::class,'getData']);
 Route::post('/reserve',[ReserveController::class,'addReserve']);
 
 Route::get('/mypage',[ReserveController::class,'myPage']);
+
+Route::post('/reserved/delete/{id}',[ReserveController::class,'delete']);
+
+Route::post('/favorite/add/{id}',[FavoriteController::class,'add']);
+
+Route::post('/favorite/delete/{id}',[FavoriteController::class,'delete']);

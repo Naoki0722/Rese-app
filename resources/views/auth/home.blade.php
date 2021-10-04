@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="app" class="font-sans text-gray-900 antialiased h-screen w-screen  bg-gray-100">
-
+  
   <x-home-header></x-home-header>
   <div class="bg-gray-100">
     <div class="flex flex-wrap w-11/12 m-auto justify-around " :class="isOpen ? 'hidden' : 'block' ">
@@ -19,8 +19,19 @@
               @csrf
               <button class="text-xs text-white font-medium rounded-md bg-blue-600 w-24 h-6">詳しくみる</button>
             </form>
-            <button >いいね</button>
-        </div>
+            <form v-if="item.favorites == 0" :action="'/favorite/add/'+item.id" method="post">
+              @csrf
+              <button class="text-3xl">&#9825;</button>
+            </form>
+            <div v-else>
+              <div v-for="favorite in item.favorites" :key="favorite.id">
+                <form :action="'/favorite/delete/'+favorite.id" method="post">
+                  @csrf
+                  <button class="text-red-400 text-3xl">&#9829;</button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

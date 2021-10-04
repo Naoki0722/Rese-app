@@ -12,11 +12,10 @@ class ReserveController extends Controller
     public function addReserve(Request $request)
     {
         $this->validate($request,Reserve::$rules);
-        
         $form = [
             'user_id' => $request->user_id,
             'shop_id' => $request->shop_id,
-            'date' => $request->day.':'.$request->time,
+            'date' => $request->day.$request->time,
             'number_of_people' => $request->number_of_people
         ];
         Reserve::create($form);
@@ -29,5 +28,11 @@ class ReserveController extends Controller
         $favorites = Favorite::where('user_id', Auth::id())->get();
         $user = Auth::user();
         return view('auth.mypage',['reservedShops' => $reservedShops, 'favorites' => $favorites, 'user' => $user]);
+    }
+
+    public function delete(Request $request)
+    {
+        Reserve::find($request->id)->delete();
+        return back();
     }
 }
