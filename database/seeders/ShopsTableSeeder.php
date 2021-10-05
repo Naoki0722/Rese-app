@@ -168,8 +168,8 @@ class ShopsTableSeeder extends Seeder
         DB::table('shops')->insert($param);
         $param = [
             'shop_name' => '木船',
-            'area_id' => 2,
-            'category_id' => 1,
+            'area_id' => 15,
+            'category_id' => 5,
             'overview' => '毎日店主自ら市場等に出向き、厳選した魚介類が、お鮨をはじめとした繊細な料理に仕立てられます。また、選りすぐりの種類豊富なドリンクもご用意しております。',
             'img' => '../img/sushi.jpeg',
         ];
