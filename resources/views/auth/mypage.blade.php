@@ -49,6 +49,9 @@
         <div>
           <div>
             <p>ここにお気に入りカード</p>
+            @if(@isset($favorites))
+            <p>{{$favorites}}</p>
+            @endif
           </div>
         </div>
       </div>
