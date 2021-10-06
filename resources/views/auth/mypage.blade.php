@@ -50,7 +50,7 @@
           @if(@isset($favorites))
           @foreach($favorites as $favorite)
           <div>
-            
+            <p>{{$favorite}}</p>
           </div>
           @endforeach
           @endif
