@@ -25,7 +25,7 @@ class ReserveController extends Controller
     public function myPage()
     {
         $reservedShops = Reserve::where('user_id', Auth::id())->with('shop')->get();
-        $favorites = Favorite::where('user_id', Auth::id())->with('shop')->get();
+        $favorites = Favorite::where('user_id', Auth::id())->with('shop.area','shop.category')->get();
         $user = Auth::user();
         return view('auth.mypage',['reservedShops' => $reservedShops, 'favorites' => $favorites, 'user' => $user]);
     }
