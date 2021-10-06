@@ -18,7 +18,7 @@
             </div>
             <form action="/reserved/delete/{{$reservedShop->id}}" method="post">
             @csrf
-              <button class=""><img src="../img/reservedDelete.jpeg" class="w-10 h-10"></button>
+              <button class="">&otimes;</button>
             </form>
           </div>
           <div class="my-2.5">
@@ -46,13 +46,14 @@
         <h2>{{$user->name}}さん</h2>
         @endif
         <p>お気に入り店舗</p>
-        <div>
+        <div class="flex flex-wrap">
+          @if(@isset($favorites))
+          @foreach($favorites as $favorite)
           <div>
-            <p>ここにお気に入りカード</p>
-            @if(@isset($favorites))
-            <p>{{$favorites}}</p>
-            @endif
+            
           </div>
+          @endforeach
+          @endif
         </div>
       </div>
     </div>
@@ -64,6 +65,7 @@
     data: {
     isOpen: false,
     reserveCount:1,
+    
     },
   })
 </script>
