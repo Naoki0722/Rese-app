@@ -28,10 +28,10 @@
   <div :class="isOpen ? 'block' : 'hidden' " class="w-screen h-screen absolute top-20 left-0 flex justify-center">
     <ul class="w-52 h-52 mt-40 ">
       <li class="text-center h-12"><a href="/" class="text-blue-600 text-4xl font-medium">Home</a></li>
+      @if(@isset($user))
       <li class="text-center h-12">
         <form method="POST" action="{{ route('logout') }}">
         @csrf
-
         <x-dropdown-link :href="route('logout')"
           onclick="event.preventDefault();
           this.closest('form').submit();"
@@ -40,6 +40,9 @@
         </x-dropdown-link>
         </form>
       </li>
+      @else
+      <li class="text-center h-12"><a href="/login" class="text-blue-600 text-4xl font-medium">Login</a></li>
+      @endif
       <li class="text-center h-12"><a href="/mypage" class="text-blue-600 text-4xl font-medium">Mypage</a></li>
     </ul>
   </div>

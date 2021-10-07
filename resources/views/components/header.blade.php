@@ -6,7 +6,7 @@
   </div>
   <div :class="isOpen ? 'block' : 'hidden' " class="w-screen h-screen absolute top-20 left-0 flex justify-center">
     <ul class="w-52 h-52 mt-40 ">
-      <li class="text-center h-12"><a href="" class="text-blue-600 text-4xl font-medium">Home</a></li>
+      <li class="text-center h-12"><a href="/" class="text-blue-600 text-4xl font-medium">Home</a></li>
       <li class="text-center h-12"><a href="/register" class="text-blue-600 text-4xl font-medium">Registration</a></li>
       <li class="text-center h-12"><a href="/login" class="text-blue-600 text-4xl font-medium">Login</a></li>
     </ul>
