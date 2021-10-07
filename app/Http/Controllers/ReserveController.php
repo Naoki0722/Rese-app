@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ReserveRequest;
 use App\Models\Reserve;
 use App\Models\Favorite;
 use Illuminate\Support\Facades\Auth;
 
 class ReserveController extends Controller
 {
-    public function addReserve(Request $request)
+    public function addReserve(ReserveRequest $request)
     {
-        $this->validate($request,Reserve::$rules);
+        
         $form = [
             'user_id' => $request->user_id,
             'shop_id' => $request->shop_id,

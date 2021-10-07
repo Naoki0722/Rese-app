@@ -4,7 +4,7 @@
 <div id="app" class="font-sans text-gray-900 antialiased h-screen w-screen  bg-gray-100">
   <x-after-header></x-after-header>
   <div class="bg-gray-100 h-screen" :class="isOpen ? 'hidden' : 'block' ">
-    @if(@isset($item,$user) || count($errors) > 0)
+    @if(@isset($item,$user))
     <div class="m-auto w-11/12 h-3/4 flex justify-around">
       <div class="w-2/5">
         <div class="my-5">
@@ -18,15 +18,14 @@
           <p class="">{{$item->overview}}</p>
         </div>
       </div>
-      
       <form action="/reserve" method="post" class="w-2/5">
       @csrf
         <div class="bg-blue-600 p-5 rounded-t-lg">
           <p class="text-white my-5 text-xl font-extrabold">予約</p>
-          @foreach($errors->all() as $error)
-          <p>{{$error}}</p>
-          @endforeach
           <input type="date" name="day" v-model="day" class="rounded-md block mb-2.5 h-8 w-40 text-xs">
+          @if($errors->has('day'))
+          <p class="text-yellow-200">{{$errors->first('day')}}</p>
+          @endif
           <select name="time" v-model="time" class="block w-full rounded-md mb-2.5 h-8 text-xs">
             <option hiiden value="">時間</option>
             <option value="16:00">16:00</option>
@@ -36,6 +35,9 @@
             <option value="20:00">20:00</option>
             <option value="21:00">21:00</option>
           </select>
+          @if($errors->has('time'))
+          <p class="text-yellow-200">{{$errors->first('time')}}</p>
+          @endif
           <select name="number_of_people" v-model="numberOfPeople" class="block w-full rounded-md h-8 text-xs">
             <option hiiden value="">人数</option>
             <option value="1">1人</option>
@@ -49,8 +51,14 @@
             <option value="9">9人</option>
             <option value="10">10人</option>
           </select>
+          @if($errors->has('number_of_people'))
+          <p class="text-yellow-200">{{$errors->first('number_of_people')}}</p>
+          @endif
           <input type="hidden" name="shop_id" value="{{$item->id}}">
           <input type="hidden" name="user_id" value="{{$user->id}}">
+          @if($errors->has('user_id'))
+          <p class="text-yellow-200">{{$errors->first('user_id')}}</p>
+          @endif
           <div class="p-5 mt-5 mb-16 bg-blue-500 rounded-md">
             <div class="my-2.5">
               <p class="inline-block text-white">Shop</p>
