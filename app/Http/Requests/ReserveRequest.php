@@ -13,11 +13,7 @@ class ReserveRequest extends FormRequest
      */
     public function authorize()
     {
-        if($this->path() == '/reserve'){
-            return false;
-        } else {
-            return true;
-        }
+        return true;
     }
 
     /**
@@ -46,4 +42,6 @@ class ReserveRequest extends FormRequest
             'number_of_people.required' => '来店人数を入力してください'
         ];
     }
+
+    
 }

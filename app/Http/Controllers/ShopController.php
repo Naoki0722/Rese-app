@@ -24,6 +24,7 @@ class ShopController extends Controller
     {
         $item = Shop::find($request->id);
         $user = Auth::user();
+        
         return view('auth.datail',['item' => $item,'user' => $user]);
     }
 }

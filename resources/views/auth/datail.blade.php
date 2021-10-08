@@ -54,34 +54,34 @@
       @csrf
         <div class="bg-blue-600 p-5 rounded-t-lg">
           <p class="text-white my-5 text-xl font-extrabold">予約</p>
-          <input type="date" name="day" v-model="day" class="rounded-md block mb-2.5 h-8 w-40 text-xs">
+          <input type="date" name="day" v-model="day" value="{{ old('day') }}" class="rounded-md block mb-2.5 h-8 w-40 text-xs">
           @if($errors->has('day'))
           <p class="text-yellow-200">{{$errors->first('day')}}</p>
           @endif
           <select name="time" v-model="time" class="block w-full rounded-md mb-2.5 h-8 text-xs">
-            <option hiiden value="">時間</option>
-            <option value="16:00">16:00</option>
-            <option value="17:00">17:00</option>
-            <option value="18:00">18:00</option>
-            <option value="19:00">19:00</option>
-            <option value="20:00">20:00</option>
-            <option value="21:00">21:00</option>
+            <option value="">時間</option>
+            <option value="16:00" @if(old('time') === '16:00') selected @endif>16:00</option>
+            <option value="17:00" @if(old('time') === '17:00') selected @endif>17:00</option>
+            <option value="18:00" @if(old('time') === '18:00') selected @endif>18:00</option>
+            <option value="19:00" @if(old('time') === '19:00') selected @endif>19:00</option>
+            <option value="20:00" @if(old('time') === '20:00') selected @endif>20:00</option>
+            <option value="21:00" @if(old('time') === '21:00') selected @endif>21:00</option>
           </select>
           @if($errors->has('time'))
           <p class="text-yellow-200">{{$errors->first('time')}}</p>
           @endif
           <select name="number_of_people" v-model="numberOfPeople" class="block w-full rounded-md h-8 text-xs">
-            <option hiiden value="">人数</option>
-            <option value="1">1人</option>
-            <option value="2">2人</option>
-            <option value="3">3人</option>
-            <option value="4">4人</option>
-            <option value="5">5人</option>
-            <option value="6">6人</option>
-            <option value="7">7人</option>
-            <option value="8">8人</option>
-            <option value="9">9人</option>
-            <option value="10">10人</option>
+            <option value="" @if(old('number_of_people') == "") selected @endif>人数</option>
+            <option value="1" @if(old('number_of_people') == "1") selected @endif>1人</option>
+            <option value="2" @if(old('number_of_people') == "2") selected @endif>2人</option>
+            <option value="3" @if(old('number_of_people') == "3") selected @endif>3人</option>
+            <option value="4" @if(old('number_of_people') == "4") selected @endif>4人</option>
+            <option value="5" @if(old('number_of_people') == "5") selected @endif>5人</option>
+            <option value="6" @if(old('number_of_people') == "6") selected @endif>6人</option>
+            <option value="7" @if(old('number_of_people') == "7") selected @endif>7人</option>
+            <option value="8" @if(old('number_of_people') == "8") selected @endif>8人</option>
+            <option value="9" @if(old('number_of_people') == "9") selected @endif>9人</option>
+            <option value="10" @if(old('number_of_people') == "10") selected @endif>10人</option>
           </select>
           @if($errors->has('number_of_people'))
           <p class="text-yellow-200">{{$errors->first('number_of_people')}}</p>
@@ -115,6 +115,7 @@
       @else
       <p class="w-2/5">ログインしてください</p>
       @endif
+      
     </div>
   </div>
 </div>
