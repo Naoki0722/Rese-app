@@ -2,10 +2,40 @@
 
 @section('content')
 <div id="app" class="font-sans text-gray-900 antialiased h-screen w-screen  bg-gray-100">
-  <x-after-header></x-after-header>
+  <header class="pl-20 bg-gray-100 p-6 flex relative">
+    <div @click="isOpen = !isOpen" class="pl-2 pt-1 h-10 w-10 bg-blue-600 rounded-md shadow-kk justify-center items-center cursor-pointer">
+    <div class="h-2 w-4 border-b"></div>
+    <div class="h-2 w-5 border-b"></div>
+    <div class="h-2 w-4 border-b"></div>
+    </div>
+    <div :class="isOpen ? 'block' : 'hidden' " class="w-screen h-screen absolute top-20 left-0 flex justify-center">
+      <ul class="w-52 h-52 mt-40 ">
+        <li class="text-center h-12"><a href="/" class="text-blue-600 text-4xl font-medium">Home</a></li>
+        @if(@isset($user))
+        <li class="text-center h-12">
+          <form method="POST" action="{{ route('logout') }}">
+          @csrf
+
+            <x-dropdown-link :href="route('logout')"
+              onclick="event.preventDefault();
+              this.closest('form').submit();"
+              class="text-blue-600 text-4xl font-medium">
+              {{ __('Log Out') }}
+            </x-dropdown-link>
+          </form>
+        </li>
+        @else
+        <li class="text-center h-12"><a href="/login" class="text-blue-600 text-4xl font-medium">Login</a></li>
+        @endif
+        <li class="text-center h-12"><a href="/mypage" class="text-blue-600 text-4xl font-medium">Mypage</a></li>
+      </ul>
+    </div>
+    <h1 class="text-blue-600 text-4xl pl-5" :class="isOpen ? 'hidden' : 'block' ">Rese</h1>
+  </header>
   <div class="bg-gray-100 h-screen" :class="isOpen ? 'hidden' : 'block' ">
-    @if(@isset($item,$user))
+    
     <div class="m-auto w-11/12 h-3/4 flex justify-around">
+    @if(@isset($item))
       <div class="w-2/5">
         <div class="my-5">
           <button onclick="window.history.back()" class="inline-block w-8 h-8 bg-white shadow-kk rounded-md">&lt;</button>
@@ -18,6 +48,8 @@
           <p class="">{{$item->overview}}</p>
         </div>
       </div>
+    @endif
+    @if(@isset($user))
       <form action="/reserve" method="post" class="w-2/5">
       @csrf
         <div class="bg-blue-600 p-5 rounded-t-lg">
@@ -80,8 +112,10 @@
         </div>
         <button class="text-white block w-full bg-blue-700 h-14 rounded-b-lg">予約する</button>
       </form>
+      @else
+      <p class="w-2/5">ログインしてください</p>
+      @endif
     </div>
-    @endif
   </div>
 </div>
 <script>
