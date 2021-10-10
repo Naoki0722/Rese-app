@@ -38,7 +38,7 @@
     @if(@isset($item))
       <div class="w-2/5">
         <div class="my-5">
-          <button onclick="window.history.back()" class="inline-block w-8 h-8 bg-white shadow-kk rounded-md">&lt;</button>
+          <button type="button" onclick="window.history.back()" class="inline-block w-8 h-8 bg-white shadow-kk rounded-md">&lt;</button>
           <p class="inline-block text-xl font-extrabold ml-2.5">{{$item->shop_name}}</p>
         </div>
         <div>
@@ -54,34 +54,48 @@
       @csrf
         <div class="bg-blue-600 p-5 rounded-t-lg">
           <p class="text-white my-5 text-xl font-extrabold">予約</p>
-          <input type="date" name="day" v-model="day" value="{{ old('day') }}" class="rounded-md block mb-2.5 h-8 w-40 text-xs">
+          <input type="date" name="day" v-model="day" class="rounded-md block mb-2.5 h-8 w-40 text-xs">
           @if($errors->has('day'))
           <p class="text-yellow-200">{{$errors->first('day')}}</p>
           @endif
+          @php
+              $times = [
+                ['tm'=>'時間','value'=>''],
+                ['tm'=>'16:00','value'=>'16:00'],
+                ['tm'=>'17:00','value'=>'17:00'],
+                ['tm'=>'18:00','value'=>'18:00'],
+                ['tm'=>'19:00','value'=>'19:00'],
+                ['tm'=>'20:00','value'=>'20:00'],
+                ['tm'=>'21:00','value'=>'21:00'],
+              ];
+            @endphp
           <select name="time" v-model="time" class="block w-full rounded-md mb-2.5 h-8 text-xs">
-            <option value="">時間</option>
-            <option value="16:00" @if(old('time') === '16:00') selected @endif>16:00</option>
-            <option value="17:00" @if(old('time') === '17:00') selected @endif>17:00</option>
-            <option value="18:00" @if(old('time') === '18:00') selected @endif>18:00</option>
-            <option value="19:00" @if(old('time') === '19:00') selected @endif>19:00</option>
-            <option value="20:00" @if(old('time') === '20:00') selected @endif>20:00</option>
-            <option value="21:00" @if(old('time') === '21:00') selected @endif>21:00</option>
+            @foreach($times as $time)
+              <option value="{{$time['value']}}">{{$time['tm']}}</option>
+            @endforeach
           </select>
           @if($errors->has('time'))
           <p class="text-yellow-200">{{$errors->first('time')}}</p>
           @endif
+          @php
+            $numbers = [
+              ['nm'=>'人数','value'=>''],
+              ['nm'=>'1人','value'=>'1'],
+              ['nm'=>'2人','value'=>'2'],
+              ['nm'=>'3人','value'=>'3'],
+              ['nm'=>'4人','value'=>'4'],
+              ['nm'=>'5人','value'=>'5'],
+              ['nm'=>'6人','value'=>'6'],
+              ['nm'=>'7人','value'=>'7'],
+              ['nm'=>'8人','value'=>'8'],
+              ['nm'=>'9人','value'=>'9'],
+              ['nm'=>'10人','value'=>'10'],
+            ]
+          @endphp
           <select name="number_of_people" v-model="numberOfPeople" class="block w-full rounded-md h-8 text-xs">
-            <option value="" @if(old('number_of_people') == "") selected @endif>人数</option>
-            <option value="1" @if(old('number_of_people') == "1") selected @endif>1人</option>
-            <option value="2" @if(old('number_of_people') == "2") selected @endif>2人</option>
-            <option value="3" @if(old('number_of_people') == "3") selected @endif>3人</option>
-            <option value="4" @if(old('number_of_people') == "4") selected @endif>4人</option>
-            <option value="5" @if(old('number_of_people') == "5") selected @endif>5人</option>
-            <option value="6" @if(old('number_of_people') == "6") selected @endif>6人</option>
-            <option value="7" @if(old('number_of_people') == "7") selected @endif>7人</option>
-            <option value="8" @if(old('number_of_people') == "8") selected @endif>8人</option>
-            <option value="9" @if(old('number_of_people') == "9") selected @endif>9人</option>
-            <option value="10" @if(old('number_of_people') == "10") selected @endif>10人</option>
+            @foreach($numbers as $number)
+            <option value="{{$number['value']}}">{{$number['nm']}}</option>
+            @endforeach
           </select>
           @if($errors->has('number_of_people'))
           <p class="text-yellow-200">{{$errors->first('number_of_people')}}</p>
@@ -124,9 +138,9 @@
     el: '#app',
     data: {
     isOpen: false,
-    day:'',
-    time:'',
-    numberOfPeople:'',
+    day:"{{ old('day') }}",
+    time:"{{ old('time') }}",
+    numberOfPeople:"{{ old('number_of_people') }}",
     },
   })
 </script>
