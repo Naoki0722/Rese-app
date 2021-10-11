@@ -8,7 +8,7 @@
   <div class="w-full h-52 sm:max-w-md px-6 py-4 bg-white overflow-hidden  rounded-md shadow-md flex justify-center items-center" >
     <div>
         <p class="mb-8 text-center text-2xl font-medium">ご予約ありがとうございます</p>
-        <a href="/" class="w-16 h-8 m-auto bg-blue-600 block text-white rounded-md text-center">戻る</a>
+        <a href="/" class="w-16 h-8 m-auto bg-blue-600 block text-white rounded-md text-center align-middle">戻る</a>
         </div>
   </div>
     
