@@ -67,6 +67,7 @@
               @csrf
               <button class="text-xs text-white font-medium rounded-md bg-blue-600 w-24 h-6">詳しくみる</button>
             </form>
+            @if(@isset($user))
             <form v-if="item.favorites == 0" :action="'/favorite/add/'+item.id" method="post">
               @csrf
               <button class="text-3xl">&#9825;</button>
@@ -79,6 +80,7 @@
                 </form>
               </div>
             </div>
+            @endif
           </div>
         </div>
       </div>
