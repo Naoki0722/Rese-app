@@ -10,8 +10,8 @@
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+        <!-- Validation Errors 
+        <x-auth-validation-errors class="mb-4" :errors="$errors" /> -->
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -20,8 +20,11 @@
             <div class="flex">
                 <img src="../logo/message.png" class="w-8 h-8 inline-block m-2">
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" placeholder="Email" required />
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" placeholder="Email" />
             </div>
+            @if($errors->has('email'))
+                <p class="text-red-400 text-center mt-2.5">{{$errors->first('email')}}</p>
+            @endif
 
             <!-- Password -->
             <div class="mt-4 flex">
@@ -31,8 +34,11 @@
                                 type="password"
                                 name="password"
                                 placeholder="Password"
-                                required autocomplete="current-password" />
+                                autocomplete="current-password" />
             </div>
+            @if($errors->has('password'))
+            <p class="text-red-400 text-center mt-2.5">{{$errors->first('password')}}</p>
+            @endif
 
 
             <div class="flex items-center justify-end mt-4">

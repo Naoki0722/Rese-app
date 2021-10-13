@@ -74,6 +74,10 @@ Route::get('/mypage',[ReserveController::class,'myPage']);
 
 Route::post('/reserved/delete/{id}',[ReserveController::class,'delete']);
 
+Route::get('/reservationchange/{id}',[ReserveController::class,'getChange']);
+
+Route::post('/reservationchange/{id}',[ReserveController::class,'update']);
+
 Route::post('/favorite/add/{id}',[FavoriteController::class,'add']);
 
 Route::post('/favorite/delete/{id}',[FavoriteController::class,'delete']);

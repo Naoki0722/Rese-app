@@ -36,4 +36,22 @@ class ReserveController extends Controller
         Reserve::find($request->id)->delete();
         return back();
     }
+
+    public function getChange(Request $request)
+    {
+        $item = Reserve::where('id',$request->id)->with('shop')->get();
+        return view('auth.reservationchange',['item' => $item]);
+    }
+
+    public function update(ReserveRequest $request)
+    {
+        $form = [
+            'user_id' => $request->user_id,
+            'shop_id' => $request->shop_id,
+            'date' => $request->day.':'.$request->time,
+            'number_of_people' => $request->number_of_people
+        ];
+        Reserve::where('id',$request->id)->update($form);
+        return view('auth.changecompleted');
+    }
 }

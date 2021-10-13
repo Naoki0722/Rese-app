@@ -94,7 +94,7 @@ $ cd
 $ mysql -u root -p
 ```
 
-パスワード＝root
+パスワードの入力を求められるのでrootと入力する。
 
 ```
 $ create database rese;

@@ -2,7 +2,37 @@
 
 @section('content')
 <div id="app" class="font-sans text-gray-900 antialiased h-screen w-screen  bg-gray-100">
-  <x-after-header></x-after-header>
+  <header class="pl-20 bg-gray-100 p-6 flex relative">
+    <div @click="isOpen = !isOpen" class="pl-2 pt-1 h-10 w-10 bg-blue-600 rounded-md shadow-kk justify-center items-center cursor-pointer">
+    <div class="h-2 w-4 border-b"></div>
+    <div class="h-2 w-5 border-b"></div>
+    <div class="h-2 w-4 border-b"></div>
+    </div>
+    <div :class="isOpen ? 'block' : 'hidden' " class="w-screen h-screen absolute top-20 left-0 flex justify-center">
+      <ul class="w-52 h-52 mt-40 ">
+        <li class="text-center h-12"><a href="/" class="text-blue-600 text-4xl font-medium">Home</a></li>
+        @if(@isset($user))
+        <li class="text-center h-12">
+          <form method="POST" action="{{ route('logout') }}">
+          @csrf
+
+            <x-dropdown-link :href="route('logout')"
+              onclick="event.preventDefault();
+              this.closest('form').submit();"
+              class="text-blue-600 text-4xl font-medium">
+              {{ __('Log Out') }}
+            </x-dropdown-link>
+          </form>
+        </li>
+        @else
+        <li class="text-center h-12"><a href="/login" class="text-blue-600 text-4xl font-medium">Login</a></li>
+        @endif
+        <li class="text-center h-12"><a href="/mypage" class="text-blue-600 text-4xl font-medium">Mypage</a></li>
+      </ul>
+    </div>
+    <h1 class="text-blue-600 text-4xl pl-5" :class="isOpen ? 'hidden' : 'block' ">Rese</h1>
+  </header>
+  @if(@isset($user))
   <div class="bg-gray-100 " :class="isOpen ? 'hidden' : 'block' ">
     <div class="flex justify-around w-11/12 m-auto">
       <div class="w-4/12">
@@ -13,31 +43,35 @@
         
         <div class="p-5 mt-5 mb-16 bg-blue-600 rounded-md">
           <div class="flex justify-between ">
-            <div class="flex">
-              <img src="../img/clock.jpeg" class="w-10 h-10">
-              <p>予約{{$loop->iteration}}</p>
+            <div class="flex items-center">
+              <img src="../img/clock2.png" class="w-5 h-5">
+              <p class="text-white ml-8 font-bold">予約{{$loop->iteration}}</p>
             </div>
             <form action="/reserved/delete/{{$reservedShop->id}}" method="post">
             @csrf
-              <button class="text-white">&otimes;</button>
+              <button class="text-white text-2xl">&otimes;</button>
             </form>
           </div>
           <div class="my-2.5">
-            <p class="inline-block text-white">Shop</p>
-            <p class="inline-block text-white ml-8">{{$reservedShop->shop->shop_name}}</p>
+            <p class="inline-block text-white w-24 font-bold">Shop</p>
+            <p class="inline-block text-white">{{$reservedShop->shop->shop_name}}</p>
           </div>
           <div class="my-2.5">
-            <p class="inline-block text-white">Date</p>
-            <p class="inline-block text-white ml-8">{{$reservedShop['date']->format('Y-m-d')}}</p>
+            <p class="inline-block text-white w-24 font-bold">Date</p>
+            <p class="inline-block text-white">{{$reservedShop['date']->format('Y-m-d')}}</p>
           </div>
           <div class="my-2.5">
-            <p class="inline-block text-white">Time</p>
-            <p class="inline-block text-white ml-8">{{$reservedShop['date']->format('H:s')}}</p>
+            <p class="inline-block text-white w-24 font-bold">Time</p>
+            <p class="inline-block text-white">{{$reservedShop['date']->format('H:s')}}</p>
           </div>
           <div class="my-2.5">
-            <p class="inline-block text-white">Number</p>
-            <p class="inline-block text-white ml-8">{{$reservedShop->number_of_people}}人</p>
+            <p class="inline-block text-white w-24 font-bold">Number</p>
+            <p class="inline-block text-white">{{$reservedShop->number_of_people}}人</p>
           </div>
+          <form action="/reservationchange/{{$reservedShop->id}}" method="get">
+          @csrf
+          <button class="text-white">予約の変更</button>
+          </form>
         </div>
         @endforeach
         @endif
@@ -74,13 +108,15 @@
       </div>
     </div>
   </div>
+  @else
+      <p class="text-center text-blue-600" :class="isOpen ? 'hidden' : 'block' ">ログインしてください</p>
+  @endif
 </div>
 <script>
   const app = new Vue({
     el: '#app',
     data: {
-    isOpen: false,
-    reserveCount:1,
+      isOpen: false,
     },
   })
 </script>

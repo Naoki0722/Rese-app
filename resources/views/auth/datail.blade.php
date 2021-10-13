@@ -59,16 +59,16 @@
           <p class="text-yellow-200">{{$errors->first('day')}}</p>
           @endif
           @php
-              $times = [
-                ['tm'=>'時間','value'=>''],
-                ['tm'=>'16:00','value'=>'16:00'],
-                ['tm'=>'17:00','value'=>'17:00'],
-                ['tm'=>'18:00','value'=>'18:00'],
-                ['tm'=>'19:00','value'=>'19:00'],
-                ['tm'=>'20:00','value'=>'20:00'],
-                ['tm'=>'21:00','value'=>'21:00'],
-              ];
-            @endphp
+            $times = [
+              ['tm'=>'時間','value'=>''],
+              ['tm'=>'16:00','value'=>'16:00'],
+              ['tm'=>'17:00','value'=>'17:00'],
+              ['tm'=>'18:00','value'=>'18:00'],
+              ['tm'=>'19:00','value'=>'19:00'],
+              ['tm'=>'20:00','value'=>'20:00'],
+              ['tm'=>'21:00','value'=>'21:00'],
+            ];
+          @endphp
           <select name="time" v-model="time" class="block w-full rounded-md mb-2.5 h-8 text-xs">
             @foreach($times as $time)
               <option value="{{$time['value']}}">{{$time['tm']}}</option>
@@ -129,7 +129,6 @@
       @else
       <p class="w-2/5">ログインしてください</p>
       @endif
-      
     </div>
   </div>
 </div>
