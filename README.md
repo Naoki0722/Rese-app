@@ -60,29 +60,17 @@ Composer Setup 「Settings Check」
 
 ```
 $ cd /Applications/MAMP/htdocs/
-```
 
-```
 $ git clone https://github.com/kadukimochida/Rese-20210918mochida
-```
 
-```
 $ cd Rese-20210918mochida
-```
 
-```
 $ composer install
-```
 
-```
 $ cp .env.example .env
-```
 
-```
 $ php artisan key:generate
-```
 
-```
 $ php artisan config:clear
 ```
 
@@ -90,20 +78,16 @@ $ php artisan config:clear
 
 ```
 $ cd
-```
 
-```
 $ mysql -u root -p
-```
 
-
-```
 $ create database rese;
 ```
 
 
 .envの修正
 
+```
 APP_ENV=local
 
 APP_URL=http://localhost:8000
@@ -115,19 +99,15 @@ DB_DATABASE=rese
 DB_USERNAME=root
 
 DB_PASSWORD=パスワード
-
+```
 
 ↓データベースを設定後
 
 ```
 $ php artisan migrate
-```
 
-```
 $ php artisan db:seed
-```
 
-```
 $ php artisan serve
 ```
 
