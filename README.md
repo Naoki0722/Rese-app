@@ -86,6 +86,8 @@ $ php artisan key:generate
 $ php artisan config:clear
 ```
 
+ここからデータベースの設定↓（MySQLの場合）
+
 ```
 $ cd
 ```
@@ -94,7 +96,6 @@ $ cd
 $ mysql -u root -p
 ```
 
-パスワードの入力を求められるのでrootと入力する。
 
 ```
 $ create database rese;
@@ -113,8 +114,10 @@ DB_DATABASE=rese
 
 DB_USERNAME=root
 
-DB_PASSWORD=root
+DB_PASSWORD=パスワード
 
+
+↓データベースを設定後
 
 ```
 $ php artisan migrate
