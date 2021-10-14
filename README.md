@@ -29,8 +29,7 @@ Laravel Framework 8.61.0
 
 ```
 $ sudo mv composer.phar /usr/local/bin/composer
-```
-```
+
 $ chmod a+x /usr/local/bin/composer
 ```
 
