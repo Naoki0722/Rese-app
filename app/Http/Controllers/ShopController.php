@@ -22,7 +22,7 @@ class ShopController extends Controller
     }
     public function getData(Request $request)
     {
-        $item = Shop::find($request->id);
+        $item = Shop::with('area','category')->find($request->id);
         $user = Auth::user();
         
         return view('auth.datail',['item' => $item,'user' => $user]);

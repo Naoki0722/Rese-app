@@ -28,18 +28,8 @@
   <div :class="isOpen ? 'block' : 'hidden' " class="w-screen h-screen absolute top-20 left-0 flex justify-center">
     <ul class="w-52 h-52 mt-40 ">
       <li class="text-center h-12"><a href="/" class="text-blue-600 text-4xl font-medium">Home</a></li>
-      <li class="text-center h-12">
-        <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <x-dropdown-link :href="route('logout')"
-          onclick="event.preventDefault();
-          this.closest('form').submit();"
-          class="text-blue-600 text-4xl font-medium">
-          {{ __('Log Out') }}
-        </x-dropdown-link>
-        </form>
-      </li>
-      <li class="text-center h-12"><a href="/mypage" class="text-blue-600 text-4xl font-medium">Mypage</a></li>
+      <li class="text-center h-12"><a href="/register" class="text-blue-600 text-4xl font-medium">Registration</a></li>
+      <li class="text-center h-12"><a href="/login" class="text-blue-600 text-4xl font-medium">Login</a></li>
     </ul>
   </div>
 </header>

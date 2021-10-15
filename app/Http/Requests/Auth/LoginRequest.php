@@ -42,6 +42,7 @@ class LoginRequest extends FormRequest
             'email.email' => 'メールアドレスの形式で入力してください',
             'password.required' => 'パスワードを入力してください',
             'password.string' => '文字を入力してください',
+            
         ];
     }
 
