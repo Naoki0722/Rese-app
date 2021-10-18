@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ReserveController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\EvaluationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
@@ -81,3 +82,7 @@ Route::post('/reservationchange/{id}',[ReserveController::class,'update']);
 Route::post('/favorite/add/{id}',[FavoriteController::class,'add']);
 
 Route::post('/favorite/delete/{id}',[FavoriteController::class,'delete']);
+
+Route::get('/evaluation/{id}',[EvaluationController::class,'index']);
+
+Route::post('/evaluation',[EvaluationController::class,'create']);

@@ -3,8 +3,6 @@
 @section('content')
 <div id="app" class="font-sans text-gray-900 antialiased h-screen w-screen  bg-gray-100">
   <x-after-header></x-after-header>
-  <p>@{{user}}</p>
-  <p>@{{favorites}}</p>
   <div class="bg-gray-100 " :class="isOpen ? 'hidden' : 'block' ">
     <div class="flex justify-around w-11/12 m-auto">
       <div class="w-4/12">
@@ -56,11 +54,11 @@
               <p class="inline-block text-xs">#@{{favorite.shop.area.area}}</p>
               <p class="inline-block text-xs">#@{{favorite.shop.category.category}}</p>
               <div class="flex justify-between">
-                <form action="'datail/:'+favorite.shop.id" method="get" class="inline-block">
+                <form :action="'/datail/:'+favorite.shop.id" method="get" class="inline-block">
                   @csrf
                   <button class="text-xs text-white font-medium rounded-md bg-blue-600 w-24 h-6">詳しくみる</button>
                 </form>
-                <form action="'/favorite/delete/'+favorite.id" method="post">
+                <form :action="'/favorite/delete/'+favorite.id" method="post">
                 @csrf
                   <button class="text-red-400 text-3xl">&#9829;</button>
                 </form>
@@ -68,13 +66,11 @@
             </div>
           </div>
         </div>
-        
       </div>
     </div>
   </div>
 </div>
 <script>
-  
 const app = new Vue({
   el: '#app',
   data: {
@@ -85,10 +81,19 @@ const app = new Vue({
   },
   filters: {
     dayFormat: function(value){
-      return format(value,'YYYY-MM-DD');
+      const date = new Date(value);
+      const year = date.getUTCFullYear();
+      const month = date.getUTCMonth()+1;
+      const day = date.getUTCDate();
+      const set = year+'-'+month+'-'+day;
+      return set;
     },
     timeFormat: function(value){
-      return format(value,'HH:MM');
+      const date = new Date(value);
+      const hour = date.getUTCHours();
+      const minutes = date.getUTCMinutes()+'0';
+      const set = hour+':'+minutes;
+      return set;
     }
   }
 })

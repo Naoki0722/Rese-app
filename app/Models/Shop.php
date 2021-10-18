@@ -38,4 +38,9 @@ class Shop extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function evaluations()
+    {
+        return $this->hasMany('App\Models\Evaluation');
+    }
 }

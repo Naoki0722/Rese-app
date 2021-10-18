@@ -68,7 +68,6 @@ const app = new Vue({
       return shops;
     }
   },
-  
 })
 
 </script>

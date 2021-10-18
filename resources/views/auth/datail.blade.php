@@ -11,9 +11,15 @@
   <div class="bg-gray-100 h-screen" :class="isOpen ? 'hidden' : 'block' ">
     <div class="m-auto w-11/12 h-3/4 flex justify-around">
       <div v-if="item" class="w-2/5">
-        <div class="my-5">
-          <button type="button" onclick="window.history.back()" class="inline-block w-8 h-8 bg-white shadow-kk rounded-md">&lt;</button>
-          <p class="inline-block text-xl font-extrabold ml-2.5">@{{item.shop_name}}</p>
+        <div class="my-5 flex justify-between">
+          <div>
+            <button type="button" onclick="window.history.back()" class="inline-block w-8 h-8 bg-white shadow-kk rounded-md">&lt;</button>
+            <p class="inline-block text-xl font-extrabold ml-2.5">@{{item.shop_name}}</p>
+          </div>
+          <form :action="'/evaluation/'+item.id" method="get">
+          @csrf
+          <button>評価を見る</button>
+          </form>
         </div>
         <div>
           <img :src="item.img" class="w-full h-4/5">
@@ -22,7 +28,7 @@
           <p>@{{item.overview}}</p>
         </div>
       </div>
-      @if(@isset($user))
+
       <form v-if="user" action="/reserve" method="post" class="w-2/5">
       @csrf
         <div class="bg-blue-600 p-5 rounded-t-lg">
@@ -60,9 +66,8 @@
         </div>
         <button class="text-white block w-full bg-blue-700 h-14 rounded-b-lg">予約する</button>
       </form>
-      @else
-      <p class="w-2/5">ログインしてください</p>
-      @endif
+
+      <p v-else class="w-2/5">ログインしてください</p>
     </div>
   </div>
 </div>
