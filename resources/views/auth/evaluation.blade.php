@@ -9,9 +9,9 @@
     <x-after-header></x-after-header>
   </div>
   <div class="bg-gray-100 h-screen" :class="isOpen ? 'hidden' : 'block' ">
-    <div class="m-auto w-11/12 h-3/4 flex justify-around">
-      <div v-if="items" class="w-2/5">
-        <h2>評価</h2>
+    <div class="m-auto w-11/12 h-3/4 flex justify-around md:block md:w-full">
+      <div v-if="items.length" class="w-2/5 md:w-3/5 md:m-auto">
+        <h2>@{{shop.shop_name}}の評価</h2>
         <div v-for="item in items" class="p-5 mt-5 mb-16 bg-blue-600 rounded-md">
           <div class="my-2.5">
             <p class="inline-block text-white w-24 font-bold">User</p>
@@ -31,10 +31,12 @@
           </div>
         </div>
       </div>
-      <form v-if="user" action="/evaluation" method="post" class="w-2/5">
+      <p v-else>まだ@{{shop.shop_name}}の評価がありません</p>
+      <form v-if="user" action="/evaluation" method="post" class="bg-gray-100 w-2/5 md:w-full">
         @csrf
-        <div class="bg-blue-600 p-5 rounded-t-lg">
-          <p class="text-white my-5 text-xl font-extrabold">評価：&#9733;&#9734;&#9734;&#9734;&#9734;〜&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+        <div class="bg-blue-500 p-5 rounded-t-lg md:w-3/5 md:m-auto">
+          <label class="font-extrabold inline-block text-white">評価：</label>
+          <p class="text-white my-5 text-xl inline-block">&#9733;&#9734;&#9734;&#9734;&#9734;〜&#9733;&#9733;&#9733;&#9733;&#9733;</p>
           <select name="evaluation" v-model="star"class="block w-full rounded-md h-8 text-xs">
             <option v-for="evaluation in evaluations" :value="evaluation.value" v-html="evaluation.ev"></option>
           </select>
@@ -43,8 +45,9 @@
           <input type="hidden" name="shop_id" :value="shop.id">
           <input type="hidden" name="user_id" :value="user.id">
         </div>
-        <button class="text-white block w-full bg-blue-700 h-14 rounded-b-lg">評価を投稿する</button>
+        <button class="text-white block w-full bg-blue-600 h-14 rounded-b-lg md:w-3/5 md:m-auto">評価を投稿する</button>
       </form>
+      <p v-else>ログインすると評価を投稿できます</p>
     </div>
   </div>
 </div>

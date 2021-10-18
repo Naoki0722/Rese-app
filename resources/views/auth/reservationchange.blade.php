@@ -8,7 +8,7 @@
 
     @foreach($item as $reserve)
     <div v-for="reserved in item">
-    <form :action="'/reservationchange/'+reserved.id" method="post" class="w-2/5 m-auto">
+    <form :action="'/reservationchange/'+reserved.id" method="post" class="w-2/5 m-auto md:w-3/5">
       @csrf
       <div class="bg-blue-600 p-5 rounded-t-lg">
         <div class="flex mb-2.5">

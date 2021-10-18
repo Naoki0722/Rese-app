@@ -11,7 +11,7 @@
   </div>
   <div class="bg-gray-100">
     <div class="flex flex-wrap w-11/12 m-auto justify-around " :class="isOpen ? 'hidden' : 'block' ">
-      <div v-for="item in filteredShops" :key="item.id" class="w-1/5 h-64 m-3 bg-white rounded-md shadow-kk" >
+      <div v-for="item in filteredShops" :key="item.id" class="w-1/5 h-64 m-3 bg-white rounded-md shadow-kk md:w-2/5" >
         <img :src="item.img" class="w-full h-3/5 rounded-t-md">
         <div class="p-2.5">
           <p class="font-semibold">@{{item.shop_name}}</p>

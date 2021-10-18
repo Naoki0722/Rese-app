@@ -5,9 +5,9 @@
   <x-after-header></x-after-header>
   <div class="bg-gray-100 " :class="isOpen ? 'hidden' : 'block' ">
     <div class="flex justify-around w-11/12 m-auto">
-      <div class="w-4/12">
+      <div class="w-4/12 md:w-6/12">
         <h2>予約状況</h2>
-        <div v-if="reservedShops">
+        <div v-if="reservedShops.length">
           <div v-for="(reservedShop,index) in reservedShops" class="p-5 mt-5 mb-16 bg-blue-600 rounded-md">
             <div class="flex justify-between ">
               <div class="flex items-center">
@@ -43,11 +43,11 @@
         </div>
         <p v-else>予約がありません</p>
       </div>
-      <div class="w-6/12">
+      <div class="w-6/12 md:w-4/12">
         <h2>@{{user.name}}さん</h2>
         <p>お気に入り店舗</p>
         <div v-if="favorites" class="flex flex-wrap justify-around">
-          <div v-for="favorite in favorites"class="w-2/5 h-64 m-3 bg-white rounded-md shadow-kk">
+          <div v-for="favorite in favorites"class="w-2/5 h-64 m-3 bg-white rounded-md shadow-kk md:w-full">
             <img :src="favorite.shop.img" class="w-full h-3/5 rounded-t-md">
             <div class="p-2.5">
               <p class="font-semibold">@{{favorite.shop.shop_name}}</p>

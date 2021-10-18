@@ -9,8 +9,8 @@
     <x-after-header></x-after-header>
   </div>
   <div class="bg-gray-100 h-screen" :class="isOpen ? 'hidden' : 'block' ">
-    <div class="m-auto w-11/12 h-3/4 flex justify-around">
-      <div v-if="item" class="w-2/5">
+    <div class="m-auto w-11/12 h-3/4 flex justify-around md:block md:w-full ">
+      <div v-if="item" class="w-2/5 md:w-3/5 md:m-auto">
         <div class="my-5 flex justify-between">
           <div>
             <button type="button" onclick="window.history.back()" class="inline-block w-8 h-8 bg-white shadow-kk rounded-md">&lt;</button>
@@ -29,9 +29,9 @@
         </div>
       </div>
 
-      <form v-if="user" action="/reserve" method="post" class="w-2/5">
-      @csrf
-        <div class="bg-blue-600 p-5 rounded-t-lg">
+      <form v-if="user" action="/reserve" method="post" class="bg-gray-100 w-2/5 md:w-full md:pt-7">
+        @csrf
+        <div class="bg-blue-600 p-5 rounded-t-lg md:w-3/5 md:m-auto">
           <p class="text-white my-5 text-xl font-extrabold">予約</p>
           <input type="date" name="day" v-model="day" class="rounded-md block mb-2.5 h-8 w-40 text-xs">
           <p v-if="dayError" class="text-yellow-200">@{{dayError}}</p>
@@ -64,10 +64,9 @@
             </div>
           </div>
         </div>
-        <button class="text-white block w-full bg-blue-700 h-14 rounded-b-lg">予約する</button>
+        <button class="text-white block w-full bg-blue-700 h-14 rounded-b-lg md:w-3/5 md:m-auto">予約する</button>
       </form>
-
-      <p v-else class="w-2/5">ログインしてください</p>
+      <p v-else class="w-2/5 md:text-center md:m-auto md:mt-20">ログインすると予約できます</p>
     </div>
   </div>
 </div>
