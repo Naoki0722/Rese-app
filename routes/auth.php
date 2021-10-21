@@ -12,6 +12,8 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ReserveController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
@@ -86,3 +88,9 @@ Route::post('/favorite/delete/{id}',[FavoriteController::class,'delete']);
 Route::get('/evaluation/{id}',[EvaluationController::class,'index']);
 
 Route::post('/evaluation',[EvaluationController::class,'create']);
+
+Route::get('/owner/home',[OwnerController::class,'index']);
+
+Route::get('/admin/home',[AdminController::class,'index']);
+
+Route::post('/addowner',[AdminController::class,'addOwner']);

@@ -6,6 +6,8 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ReserveController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +29,9 @@ Route::get('/', function () {
 require __DIR__.'/auth.php';
 
 Route::get('/',[ShopController::class,'index']);
-Route::get('/done',function(){
-    return view('auth.done');
-});
+Route::get('/owner/home',[OwnerController::class,'index']);
+Route::get('/admin/home',[AdminController::class,'index']);
+
+
 
 

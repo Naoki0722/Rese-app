@@ -14,6 +14,7 @@
 
         <form method="POST" action="/thanks">
             @csrf
+            <input type="hidden" name="role" value="customer">
 
             <!-- Name -->
             <div class="flex">

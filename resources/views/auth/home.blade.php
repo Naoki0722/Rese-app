@@ -3,11 +3,17 @@
 @section('content')
 
 <div id="app" class="font-sans text-gray-900 antialiased h-screen w-screen  bg-gray-100">
-  <div v-if="user === null">
+  <div v-if="user == null">
     <x-home-header-login></x-home-header-login>
   </div>
-  <div v-else>
+  <div v-else-if="user.role === 'customer'">
     <x-home-header></x-home-header>
+  </div>
+  <div v-else-if="user.role === 'admin'">
+    <x-admin-header></x-admin-header>
+  </div>
+  <div v-else-if="user.role === 'owner'">
+    <x-owner-header></x-owner-header>
   </div>
   <div class="bg-gray-100">
     <div class="flex flex-wrap w-11/12 m-auto justify-around " :class="isOpen ? 'hidden' : 'block' ">
@@ -23,7 +29,7 @@
               <button class="text-xs text-white font-medium rounded-md bg-blue-600 w-24 h-6">詳しくみる</button>
             </form>
             <div v-if="user">
-              <form v-if="item.favorites == 0" :action="'/favorite/add/'+item.id" method="post">
+              <form v-if="item.favorites.length === 0 " :action="'/favorite/add/'+item.id" method="post">
                 @csrf
                 <button class="text-3xl">&#9825;</button>
               </form>

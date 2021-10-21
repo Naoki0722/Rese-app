@@ -43,4 +43,9 @@ class Shop extends Model
     {
         return $this->hasMany('App\Models\Evaluation');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'owner_id');
+    }
 }

@@ -5,8 +5,6 @@
   <x-after-header></x-after-header>
   <div class="bg-gray-100 h-screen" :class="isOpen ? 'hidden' : 'block' ">
     <p class="text-blue-600 text-center text-2xl font-bold my-5">予約変更</p>
-
-    @foreach($item as $reserve)
     <div v-for="reserved in item">
     <form :action="'/reservationchange/'+reserved.id" method="post" class="w-2/5 m-auto md:w-3/5">
       @csrf
@@ -40,7 +38,6 @@
       <button class="text-white block w-full bg-blue-700 h-14 rounded-b-lg">予約を変更する</button>
     </form>
     </div>
-    @endforeach
   </div>
 </div>
 <script>

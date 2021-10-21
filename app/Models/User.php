@@ -57,4 +57,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Evaluation');
     }
+
+    public function shops()
+    {
+        return $this->hasMany('App\Models\Shop','owner_id');
+    }
 }
+
