@@ -3,10 +3,10 @@
 @section('content')
 
 <div id="app" class="font-sans text-gray-900 antialiased h-screen w-screen  bg-gray-100">
-  <div v-if="user == null || user.role === ''">
+  <div v-if="user == null">
     <x-home-header-login></x-home-header-login>
   </div>
-  <div v-else-if="user.role === 'customer'">
+  <div v-else-if="user.role === 'customer' || user.role === ''">
     <x-home-header></x-home-header>
   </div>
   <div v-else-if="user.role === 'admin'">
@@ -15,6 +15,7 @@
   <div v-else-if="user.role === 'owner'">
     <x-owner-header></x-owner-header>
   </div>
+  <p>@{{user}}</p>
   <div class="bg-gray-100">
     <div class="flex flex-wrap w-11/12 m-auto justify-around " :class="isOpen ? 'hidden' : 'block' ">
       <div v-for="item in filteredShops" :key="item.id" class="w-1/5 h-64 m-3 bg-white rounded-md shadow-kk md:w-2/5" >
