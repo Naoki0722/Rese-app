@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="app" class="font-sans text-gray-900 antialiased h-screen w-screen  bg-gray-100">
-  <div v-if="user == null">
+  <div v-if="user == null || user.role === ''">
     <x-home-header-login></x-home-header-login>
   </div>
   <div v-else-if="user.role === 'customer'">
