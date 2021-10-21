@@ -29,7 +29,8 @@ class EvaluationController extends Controller
         $shop = [
             'shop_id' => $request->shop_id
         ];
+        $user = Auth::user();
         Evaluation::create($form);
-        return view('auth.postingcompleted',['shop' => $shop]);
+        return view('auth.postingcompleted',['shop' => $shop,'user' => $user]);
     }
 }

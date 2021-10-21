@@ -20,7 +20,8 @@ class ReserveController extends Controller
             'number_of_people' => $request->number_of_people
         ];
         Reserve::create($form);
-        return view('auth.done');
+        $user = Auth::user();
+        return view('auth.done',['user' => $user]);
     }
     
     public function myPage()
@@ -40,7 +41,8 @@ class ReserveController extends Controller
     public function getChange(Request $request)
     {
         $item = Reserve::where('id',$request->id)->with('shop')->get();
-        return view('auth.reservationchange',['item' => $item]);
+        $user = Auth::user();
+        return view('auth.reservationchange',['item' => $item,'user' => $user]);
     }
 
     public function update(ReserveRequest $request)
@@ -52,6 +54,7 @@ class ReserveController extends Controller
             'number_of_people' => $request->number_of_people
         ];
         Reserve::where('id',$request->id)->update($form);
-        return view('auth.changecompleted');
+        $user = Auth::user();
+        return view('auth.changecompleted',['user' => $user]);
     }
 }
