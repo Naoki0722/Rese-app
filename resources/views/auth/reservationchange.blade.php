@@ -87,16 +87,16 @@
     methods: {
       dayFormat: function(value){
         const date = new Date(value);
-        const year = date.getUTCFullYear();
-        const month = ("0" +(date.getUTCMonth()+1)).slice(-2);
-        const day = ("0" +date.getUTCDate()).slice(-2);
+        const year = date.getFullYear();
+        const month = ("0" +(date.getMonth()+1)).slice(-2);
+        const day = ("0" +date.getDate()).slice(-2);
         const set = year+'-'+month+'-'+day;
         return this.day = set;
       },
       timeFormat: function(value){
         const date = new Date(value);
-        const hour = date.getUTCHours();
-        const minutes = date.getUTCMinutes()+'0';
+        const hour = date.getHours();
+        const minutes = date.getMinutes()+'0';
         const set = hour+':'+minutes;
         return this.time = set;
       },

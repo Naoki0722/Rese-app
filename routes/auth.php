@@ -94,3 +94,11 @@ Route::get('/owner/home',[OwnerController::class,'index']);
 Route::get('/admin/home',[AdminController::class,'index']);
 
 Route::post('/addowner',[AdminController::class,'addOwner']);
+
+Route::post('/shopinfocreate',[OwnerController::class,'shopCreate']);
+
+Route::get('/shopupdate/{id}',[OwnerController::class,'shopUpdate']);
+
+Route::post('/shopupdate/{id}',[OwnerController::class,'shopInfoUpdate']);
+
+Route::get('/reservationinfo/{id}',[OwnerController::class,'getReservation']);
