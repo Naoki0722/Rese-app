@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="app" class="font-sans text-gray-900 antialiased h-screen w-screen  bg-gray-100">
-  <div v-if="user.role === 'customer' || user.role === ''">
+  <div v-if="user.role === 'customer' || user.role === '' || !user">
     <x-after-header></x-after-header>
   </div>
   <div v-else-if="user.role === 'admin'">
@@ -10,6 +10,9 @@
   </div>
   <div v-else-if="user.role === 'owner'">
     <x-owner-header></x-owner-header>
+  </div>
+  <div v-else>
+    <x-header></x-header>
   </div>
   <div class="bg-gray-100 h-screen" :class="isOpen ? 'hidden' : 'block' ">
     <div class="m-auto w-11/12 h-3/4 flex justify-around md:block md:w-full ">
