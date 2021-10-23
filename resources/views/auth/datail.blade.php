@@ -2,14 +2,16 @@
 
 @section('content')
 <div id="app" class="font-sans text-gray-900 antialiased h-screen w-screen  bg-gray-100">
-  <div v-if="user.role === 'customer' || user.role === '' || !user">
-    <x-after-header></x-after-header>
-  </div>
-  <div v-else-if="user.role === 'admin'">
-    <x-admin-header></x-admin-header>
-  </div>
-  <div v-else-if="user.role === 'owner'">
-    <x-owner-header></x-owner-header>
+  <div v-if="user">
+    <div v-if="user.role === 'customer' || user.role === '' || !user">
+      <x-after-header></x-after-header>
+    </div>
+    <div v-else-if="user.role === 'admin'">
+      <x-admin-header></x-admin-header>
+    </div>
+    <div v-else-if="user.role === 'owner'">
+      <x-owner-header></x-owner-header>
+    </div>
   </div>
   <div v-else>
     <x-header></x-header>
