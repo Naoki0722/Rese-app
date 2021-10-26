@@ -5,7 +5,7 @@
   <div class="bg-gray-100 h-screen p-5" :class="isOpen ? 'hidden' : 'block' ">
     <div>
       <h2 class="text-blue-400 border-b border-blue-400 text-2xl">店舗情報更新</h2>
-      <form :action="'/shopupdate/'+items.id" method="post">
+      <form :action="'/shopupdate/'+items.id" method="post" enctype="multipart/form-data">
       @csrf
       <div class="p-2.5 mt-5">
         <label class="inline-block text-blue-400 w-36">店舗名</label>
@@ -28,9 +28,7 @@
       </div>
       <div class="p-2.5">
         <label class="inline-block text-blue-400 w-36">画像</label>
-        <select name="img" v-model="imgPath" class="border-blue-400 rounded-md w-2/5">
-          <option v-for="img in imgs" :value="img.value">@{{img.img}}</option>
-        </select>
+        <input type="file" name="img">
         <p v-if="imgError" class="w-1/2 text-center text-red-300">@{{imgError}}</p>
       </div>
       <div class="p-2.5">

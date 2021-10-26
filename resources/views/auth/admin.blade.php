@@ -10,17 +10,17 @@
       <h2 class="text-white text-center mb-2.5">店舗代表者作成フォーム</h2>
       <div class="flex">
           <p class="text-white w-24 font-bold">Name</p>
-          <input type="text" name="name" class="rounded-md block mb-2.5 h-8 w-full text-xs">
+          <input type="text" name="name" v-model="name" class="rounded-md block mb-2.5 h-8 w-full text-xs">
         </div>
         <p v-if="nameError" class="text-yellow-200 text-center">@{{nameError}}</p>
         <div class="flex">
           <p class="text-white w-24 font-bold">Email</p>
-          <input type="email" name="email" class="rounded-md block mb-2.5 h-8 w-full text-xs">
+          <input type="email" name="email" v-model="email" class="rounded-md block mb-2.5 h-8 w-full text-xs">
         </div>
         <p v-if="emailError" class="text-yellow-200 text-center">@{{emailError}}</p>
         <div class="flex">
           <p class="text-white w-24 font-bold">Password</p>
-          <input type="text" name="password" class="rounded-md block mb-2.5 h-8 w-full text-xs">
+          <input type="text" name="password" v-model="password" class="rounded-md block mb-2.5 h-8 w-full text-xs">
         </div>
         <p v-if="passwordError" class="text-yellow-200 text-center">@{{passwordError}}</p>
         <input type="hidden" name="role" value="owner">
@@ -38,6 +38,9 @@
       nameError:"{{$errors->first('name')}}",
       emailError:"{{$errors->first('email')}}",
       passwordError:"{{$errors->first('password')}}",
+      name:"{{ old('name')}}",
+      email:"{{ old('email')}}",
+      password:"{{ old('password')}}"
     }
   })
 </script>

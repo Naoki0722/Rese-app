@@ -25,7 +25,7 @@
     </div>
     <div>
       <h2 class="text-blue-500 border-b border-blue-500 text-2xl">店舗情報作成</h2>
-      <form action="/shopinfocreate" method="post">
+      <form action="/shopinfocreate" method="post" enctype="multipart/form-data">
       @csrf
       <div class="p-2.5 mt-5">
         <label class="inline-block text-blue-400 w-36">店舗名</label>
@@ -48,9 +48,7 @@
       </div>
       <div class="p-2.5">
         <label class="inline-block text-blue-400 w-36">画像</label>
-        <select name="img" class="border-blue-400 rounded-md w-2/5">
-          <option v-for="img in imgs" :value="img.value">@{{img.img}}</option>
-        </select>
+        <input type="file" name="img">
         <p v-if="imgError" class="w-1/2 text-center text-red-300">@{{imgError}}</p>
       </div>
       <div class="p-2.5 h-36 flex items-center">

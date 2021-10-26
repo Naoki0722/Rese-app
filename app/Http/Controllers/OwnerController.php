@@ -9,6 +9,7 @@ use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Category;
 use App\Models\Reserve;
+use Storage;
 
 
 class OwnerController extends Controller
@@ -24,12 +25,14 @@ class OwnerController extends Controller
 
     public function shopCreate(ShopRequest $request)
     {
+        $img = $request->img;
+        $path = Storage::disk('s3')->putFile('myprefix', $img, 'public');
         $form = [
             'shop_name' => $request->shop_name,
             'area_id' => $request->area_id,
             'category_id' => $request->category_id,
             'overview' => $request->overview,
-            'img' => $request->img,
+            'img' => Storage::disk('s3')->url($path),
             'owner_id' => $request->owner_id,
         ];
         Shop::create($form);
@@ -48,12 +51,14 @@ class OwnerController extends Controller
 
     public function shopInfoUpdate(ShopRequest $request)
     {
+        $img = $request->img;
+        $path = Storage::disk('s3')->putFile('myprefix', $img, 'public');
         $form = [
             'shop_name' => $request->shop_name,
             'area_id' => $request->area_id,
             'category_id' => $request->category_id,
             'overview' => $request->overview,
-            'img' => $request->img,
+            'img' => Storage::disk('s3')->url($path),
             'owner_id' => $request->owner_id,
         ];
         Shop::where('id',$request->id)->update($form);
