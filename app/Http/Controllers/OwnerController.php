@@ -9,7 +9,7 @@ use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Category;
 use App\Models\Reserve;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 
 
 class OwnerController extends Controller
