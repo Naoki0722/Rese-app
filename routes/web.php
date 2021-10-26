@@ -26,7 +26,10 @@ Route::get('/', function () {
     return view('auth.home');
 })->middleware(['auth'])->name('dashboard');
 
+
+
 require __DIR__.'/auth.php';
+
 
 Route::get('/',[ShopController::class,'index']);
 Route::get('/owner/home',[OwnerController::class,'index']);
