@@ -64,6 +64,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Models\Shop','owner_id');
     }
 
-    
+
 }
 
