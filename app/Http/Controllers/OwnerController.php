@@ -49,16 +49,22 @@ class OwnerController extends Controller
         return view('auth.shopupdate',['items' => $items,'user' => $user,'areas' => $areas,'categories' => $categories]);
     }
 
-    public function shopInfoUpdate(ShopRequest $request)
+    public function shopInfoUpdate(Request $request)
     {
+        $shop = Shop::find($request->id);
         $img = $request->img;
-        $path = Storage::disk('s3')->putFile('myprefix', $img, 'public');
+        if($img){
+            $path = Storage::disk('s3')->putFile('myprefix', $img, 'public');
+            $shopImg = Storage::disk('s3')->url($path);
+        } else {
+            $shopImg = $shop->img;
+        }
         $form = [
             'shop_name' => $request->shop_name,
             'area_id' => $request->area_id,
             'category_id' => $request->category_id,
             'overview' => $request->overview,
-            'img' => Storage::disk('s3')->url($path),
+            'img' => $shopImg,
             'owner_id' => $request->owner_id,
         ];
         Shop::where('id',$request->id)->update($form);

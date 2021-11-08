@@ -2,10 +2,10 @@
 @section('content')
 <div id="app" class="font-sans text-gray-900 antialiased h-screen w-screen  bg-gray-100">
   <x-owner-header></x-owner-header>
-  <div class="bg-gray-100 h-screen p-5" :class="isOpen ? 'hidden' : 'block' ">
+  <div class="bg-gray-100 h-screen" :class="isOpen ? 'hidden' : 'block' ">
     <div>
       <h2 class="text-blue-400 border-b border-blue-400 text-2xl">店舗情報更新</h2>
-      <form :action="'/shopupdate/'+items.id" method="post" enctype="multipart/form-data">
+      <form :action="'/shopupdate/'+items.id" method="post" enctype="multipart/form-data" class="bg-gray-100 m-5">
       @csrf
       <div class="p-2.5 mt-5">
         <label class="inline-block text-blue-400 w-36">店舗名</label>
@@ -30,6 +30,10 @@
         <label class="inline-block text-blue-400 w-36">画像</label>
         <input type="file" name="img">
         <p v-if="imgError" class="w-1/2 text-center text-red-300">@{{imgError}}</p>
+      </div>
+      <div class="p-2.5 flex items-center">
+        <label class="inline-block text-blue-400 w-36">現在の画像</label>
+        <img :src="items.img" class="w-1/5 h-3/5">
       </div>
       <div class="p-2.5">
         <label class="inline-block text-blue-400 w-36">説明文</label>

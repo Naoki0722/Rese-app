@@ -15,7 +15,12 @@
         <td class="text-center">@{{item.date | dayFormat}}</td>
         <td class="text-center">@{{item.date | timeFormat}}</td>
         <td class="text-center">@{{item.number_of_people}}人</td>
-        <td class="text-center">@{{item.user.name}}</td>
+        <td class="text-center">
+          <form :action="'/mailform/'+item.user_id" method="get">
+            @csrf
+            <button>@{{item.user.name}}</button>
+          </form>
+        </td>
       </tr>
     </table>
   </div>

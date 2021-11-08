@@ -1,0 +1,9 @@
+<p>
+  Email:{{$mail['email']}}
+</p>
+<p>
+  件名:{{$mail['subject']}}
+</p>
+<p>
+  メッセージ:{{$mail['message']}}
+</p>

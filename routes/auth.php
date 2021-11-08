@@ -14,7 +14,9 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
                 ->middleware('guest')
@@ -102,3 +104,9 @@ Route::get('/shopupdate/{id}',[OwnerController::class,'shopUpdate']);
 Route::post('/shopupdate/{id}',[OwnerController::class,'shopInfoUpdate']);
 
 Route::get('/reservationinfo/{id}',[OwnerController::class,'getReservation']);
+
+Route::get('/mailform/{id}',[MailController::class,'index']);
+
+Route::post('/mailconfirm',[MailController::class,'confirm']);
+
+Route::post('/sendmail',[MailController::class,'send']);
