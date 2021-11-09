@@ -29,6 +29,6 @@ class ContactMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('【問い合わせ】'.$this->mail['subject'])->view('contact.mail');
+        return $this->subject($this->mail['subject'])->view('contact.mail');
     }
 }

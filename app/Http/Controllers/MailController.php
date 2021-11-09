@@ -21,7 +21,8 @@ class MailController extends Controller
     {
         $address = User::find($request->id);
         $user = Auth::user();
-        return view('auth.mailform',['address' => $address, 'user' => $user]);
+        $shopName = $request->shop_name;
+        return view('auth.mailform',['address' => $address, 'user' => $user,'shopName' => $shopName]);
     }
 
     public function confirm(MailRequest $request)
@@ -30,6 +31,8 @@ class MailController extends Controller
             'email' => $request->email,
             'subject' => $request->subject,
             'message' => $request->message,
+            'shopName' => $request->shop_name,
+            'name' => $request->name,
         ];
         $name = $request->name;
         $user = Auth::user();
@@ -41,6 +44,7 @@ class MailController extends Controller
     {
         $mail = $request->session()->get('mail');
         Mail::to($request->email)->send(new ContactMail($mail));
+        $request->session()->forget('mail');
         $user = Auth::user();
         return view('auth.sendcompletely',['user'=>$user]);
     }

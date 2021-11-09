@@ -18,6 +18,7 @@
         <td class="text-center">
           <form :action="'/mailform/'+item.user_id" method="get">
             @csrf
+            <input type="hidden" name="shop_name" :value="shop.shop_name">
             <button>@{{item.user.name}}</button>
           </form>
         </td>

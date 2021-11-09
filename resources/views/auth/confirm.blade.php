@@ -10,11 +10,11 @@
   </div>
   <div class="p-2.5 ml-5">
     <label class="inline-block text-blue-400 w-36">件名</label>
-    <p class="inline-block">@{{mail.subject}}</p>
+    <p class="inline-block w-2/5">@{{mail.subject}}</p>
   </div>
   <div class="p-2.5 ml-5">
     <label class="inline-block text-blue-400 w-36">本文</label>
-    <p class="inline-block">@{{mail.message}}</p>
+    <p class="inline-block w-2/5">@{{mail.message}}</p>
   </div>
   <div class="p-2.5 w-1/2 flex justify-center">
     <button type="button" onclick="window.history.back()" class="inline-block w-24 text-blue-600 border-b border-blue-600">戻る</button>

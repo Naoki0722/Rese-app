@@ -1,8 +1,8 @@
 <p>
-  Email:{{$mail['email']}}
+  {{$mail['name']}} 様
 </p>
 <p>
-  件名:{{$mail['subject']}}
+  {{$mail['shopName']}} からのお問い合わせです。
 </p>
 <p>
   メッセージ:{{$mail['message']}}
