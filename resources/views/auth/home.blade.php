@@ -10,10 +10,10 @@
     <x-home-header></x-home-header>
   </div>
   <div v-else-if="user.role === 'admin'">
-    <x-admin-header></x-admin-header>
+    <x-admin-home-header></x-admin-home-header>
   </div>
   <div v-else-if="user.role === 'owner'">
-    <x-owner-header></x-owner-header>
+    <x-owner-home-header></x-owner-home-header>
   </div>
   <div class="bg-gray-100">
     <div class="flex flex-wrap w-11/12 m-auto justify-around " :class="isOpen ? 'hidden' : 'block' ">

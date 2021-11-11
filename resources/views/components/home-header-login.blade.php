@@ -8,7 +8,7 @@
   
     <h1 class="text-blue-600 text-4xl pl-5 inline-block" :class="isOpen ? 'hidden' : 'block' ">Rese</h1>
   </div>
-  <div>
+  <div :class="isOpen ? 'hidden' : 'block' ">
     <select name="area" v-model="area">
       <option hiiden value="">All area</option>
       <option value="東京都">東京都</option>

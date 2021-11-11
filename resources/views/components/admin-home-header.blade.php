@@ -40,6 +40,7 @@
         </form>
       </li>
       <li class="text-center h-12"><a href="/mypage" class="text-blue-600 text-4xl font-medium">Mypage</a></li>
+      <li class="text-center h-12"><a href="/admin/home" class="text-blue-600 text-4xl font-medium">Admin</a></li>
     </ul>
   </div>
 </header>
