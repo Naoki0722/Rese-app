@@ -21,7 +21,7 @@ class AdminController extends Controller
         $form = [
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => bcrypt($request->password),
             'role' => $request->role,
         ];
         User::create($form);
