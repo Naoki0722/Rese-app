@@ -5,7 +5,6 @@
       <div class="h-2 w-5 border-b"></div>
       <div class="h-2 w-4 border-b"></div>
     </div>
-  
     <h1 class="text-blue-600 text-4xl pl-5 inline-block" :class="isOpen ? 'hidden' : 'block' ">Rese</h1>
   </div>
   <div :class="isOpen ? 'hidden' : 'block' ">

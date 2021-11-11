@@ -20,7 +20,7 @@
         <p v-if="emailError" class="text-yellow-200 text-center">@{{emailError}}</p>
         <div class="flex">
           <p class="text-white w-24 font-bold">Password</p>
-          <input type="text" name="password" v-model="password" class="rounded-md block mb-2.5 h-8 w-full text-xs">
+          <input type="password" name="password" v-model="password" class="rounded-md block mb-2.5 h-8 w-full text-xs">
         </div>
         <p v-if="passwordError" class="text-yellow-200 text-center">@{{passwordError}}</p>
         <input type="hidden" name="role" value="owner">
