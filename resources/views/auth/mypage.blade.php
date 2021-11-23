@@ -43,10 +43,16 @@
               <p class="inline-block text-white w-24 font-bold">Number</p>
               <p class="inline-block text-white">@{{reservedShop.number_of_people}}人</p>
             </div>
+            <div class="my-2.5 flex justify-between">
             <form :action="'/reservationchange/'+reservedShop.id" method="get">
-            @csrf
-            <button class="text-white">予約の変更</button>
+              @csrf
+              <button class="text-white">予約の変更</button>
             </form>
+            <form :action="'/qrcode/'+reservedShop.id" method="get">
+                @csrf
+                <button class="text-white">QRコードの表示</button>
+              </form>
+            </div>
           </div>
         </div>
         <p v-else>予約がありません</p>

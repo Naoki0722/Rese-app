@@ -34,6 +34,7 @@ require __DIR__.'/auth.php';
 Route::get('/',[ShopController::class,'index']);
 Route::get('/owner/home',[OwnerController::class,'index']);
 Route::get('/admin/home',[AdminController::class,'index']);
+Route::get('reservationdatails/{id}',[ReserveController::class,'reservationDatails'])->name('reservationdatails');
 
 
 

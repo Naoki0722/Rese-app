@@ -57,4 +57,17 @@ class ReserveController extends Controller
         $user = Auth::user();
         return view('auth.changecompleted',['user' => $user]);
     }
+
+    public function showQr(Request $request)
+    {
+        $item = Reserve::where('id',$request->id)->with('shop','user')->get();
+        $user = Auth::user();
+        return view('auth.showqr', ['item' => $item, 'user' => $user]);
+    }
+
+    public function reservationDatails(Request $request)
+    {
+        $item = Reserve::where('id',$request->id)->with('shop','user')->get();
+        return view('auth.reservationdatails',['item' => $item]);
+    }
 }

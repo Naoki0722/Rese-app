@@ -110,3 +110,6 @@ Route::get('/mailform/{id}',[MailController::class,'index']);
 Route::post('/mailconfirm',[MailController::class,'confirm']);
 
 Route::post('/sendmail',[MailController::class,'send']);
+
+Route::get('qrcode/{id}',[ReserveController::class,'showQr']);
+
