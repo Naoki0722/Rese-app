@@ -54,4 +54,9 @@ class Shop extends Model
     {
         return $this->belongsTo(User::class,'owner_id');
     }
+
+    public function menus()
+    {
+        return $this->hasMany(Menu::class);
+    }
 }

@@ -17,7 +17,9 @@ class ReserveController extends Controller
             'user_id' => $request->user_id,
             'shop_id' => $request->shop_id,
             'date' => $request->day.$request->time,
-            'number_of_people' => $request->number_of_people
+            'number_of_people' => $request->number_of_people,
+            'menu_id' => $request->menu,
+            'payment' => 0,
         ];
         Reserve::create($form);
         $user = Auth::user();
@@ -26,7 +28,7 @@ class ReserveController extends Controller
     
     public function myPage()
     {
-        $reservedShops = Reserve::where('user_id', Auth::id())->with('shop')->get();
+        $reservedShops = Reserve::where('user_id', Auth::id())->with('shop','menu')->get();
         $favorites = Favorite::where('user_id', Auth::id())->with('shop.area','shop.category')->get();
         $user = Auth::user();
         return view('auth.mypage',['reservedShops' => $reservedShops, 'favorites' => $favorites, 'user' => $user]);
@@ -70,4 +72,6 @@ class ReserveController extends Controller
         $item = Reserve::where('id',$request->id)->with('shop','user')->get();
         return view('auth.reservationdatails',['item' => $item]);
     }
+
+    
 }

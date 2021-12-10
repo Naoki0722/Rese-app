@@ -43,6 +43,14 @@
               <p class="inline-block text-white w-24 font-bold">Number</p>
               <p class="inline-block text-white">@{{reservedShop.number_of_people}}人</p>
             </div>
+            <div v-if="reservedShop.menu_id === 0" class="my-2.5">
+              <p class="inline-block text-white w-24 font-bold">Menu</p>
+              <p class="inline-block text-white">お席のみご予約</p>
+            </div>
+            <div v-else class="my-2.5">
+              <p class="inline-block text-white w-24 font-bold">Menu</p>
+              <p class="inline-block text-white">@{{reservedShop.menu.menu_name}}</p>
+            </div>
             <div class="my-2.5 flex justify-between">
             <form :action="'/reservationchange/'+reservedShop.id" method="get">
               @csrf

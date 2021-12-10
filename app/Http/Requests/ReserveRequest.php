@@ -28,7 +28,9 @@ class ReserveRequest extends FormRequest
             'shop_id' => 'required',
             'day' => 'required',
             'time' => 'required',
-            'number_of_people' => 'required'
+            'number_of_people' => 'required',
+            'menu_id' => 'required',
+            'payment' => 'required',
         ];
     }
 
@@ -39,7 +41,8 @@ class ReserveRequest extends FormRequest
             'shop_id.required' => '予約する店が指定されていません',
             'day.required' => '日にちを入力してください',
             'time.required' => '時間を入力してください',
-            'number_of_people.required' => '来店人数を入力してください'
+            'number_of_people.required' => '来店人数を入力してください',
+            'menu_id.required' => 'メニューを選択してください',
         ];
     }
 

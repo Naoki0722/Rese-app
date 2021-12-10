@@ -15,7 +15,8 @@ class Reserve extends Model
         'shop_id' => 'required',
         'day' => 'required',
         'time' => 'required',
-        'number_of_people' => 'required'
+        'number_of_people' => 'required',
+        'payment' => 'required'
     );
 
     public function user()
@@ -26,5 +27,10 @@ class Reserve extends Model
     public function shop()
     {
         return $this->belongsTo('App\Models\Shop');
+    }
+
+    public function menu()
+    {
+        return $this->belongsTo(Menu::class);
     }
 }

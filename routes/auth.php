@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -113,3 +114,8 @@ Route::post('/sendmail',[MailController::class,'send']);
 
 Route::get('qrcode/{id}',[ReserveController::class,'showQr']);
 
+Route::post('/pay', function (Request $request){
+  dd($request->paymentMethodId);
+  $request->user()->charge($request->price, $request->paymentMethodId);
+  return redirect('/');
+});

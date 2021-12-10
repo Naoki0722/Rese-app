@@ -36,7 +36,6 @@
           <p>@{{item.overview}}</p>
         </div>
       </div>
-
       <form v-if="user" action="/reserve" method="post" class="bg-gray-100 w-2/5 md:w-full md:pt-7">
         @csrf
         <div class="bg-blue-600 p-5 rounded-t-lg md:w-3/5 md:m-auto">
@@ -47,12 +46,18 @@
             <option v-for="time in times" :value="time.value">@{{time.tm}}</option>
           </select>
           <p v-if="timeError" class="text-yellow-200">@{{timeError}}</p>
-          <select name="number_of_people" v-model="numberOfPeople" class="block w-full rounded-md h-8 text-xs">
+          <select name="number_of_people" v-model="numberOfPeople" class="block w-full rounded-md mb-2.5 h-8 text-xs">
             <option v-for="number in numbers" :value="number.value">@{{number.nm}}</option>
           </select>
           <p v-if="numberOfPeopleError" class="text-yellow-200">@{{numberOfPeopleError}}</p>
+          <select v-model="selectMenu" class="block w-full rounded-md mb-2.5 h-8 text-xs">
+            <option :value="{id:'',menu:'',price:''}">コースを選択してください</option>
+            <option v-for="menu in menus" :value="{id:menu.id, menu:menu.menu_name, price:menu.price}">@{{menu.menu_name}}</option>
+          </select>
+          <p v-if="selectMenuError" class="text-yellow-200">@{{selectMenuError}}</p>
           <input type="hidden" name="shop_id" :value="item.id">
           <input type="hidden" name="user_id" :value="user.id">
+          <input type="hidden" name="menu" :value="selectMenu['id']">
           <div class="p-5 mt-5 mb-16 bg-blue-500 rounded-md">
             <div class="my-2.5">
               <p class="inline-block text-white">Shop</p>
@@ -70,6 +75,10 @@
               <p class="inline-block text-white">Number</p>
               <p class="inline-block text-white ml-8">@{{numberOfPeople}}</p>
             </div>
+            <div class="my-2.5">
+              <p class="inline-block text-white">Menu</p>
+              <p class="inline-block text-white ml-8">@{{selectMenu['menu']}}</p>
+            </div>
           </div>
         </div>
         <button class="text-white block w-full bg-blue-700 h-14 rounded-b-lg md:w-3/5 md:m-auto">予約する</button>
@@ -77,8 +86,59 @@
       <p v-else class="w-2/5 md:text-center md:m-auto md:mt-20">ログインすると予約できます</p>
     </div>
   </div>
+  <div class="py-12 bg-gray-100" :class="isOpen ? 'hidden' : 'block' ">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="p-6 bg-white border-b border-gray-200">
+          <h2>購入</h2>
+          <form id="setup-form" action="/pay" method="post">
+            @csrf
+            <input type="hidden" name="price" :value="selectMenu.price">
+            <input id="card-holder-name" type="text" placeholder="カード名義人" name="card-holder-name">
+            <div id="card-element"></div>
+            <button id="card-button">購入</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <script>
+  const stripe = Stripe('pk_test_51K2okKIY8x8aHGyFvsCxcICPge43IXWLRyGCrYg6Tr1gfkSQrLEX3XNKSuDlfUIdHmlGAuk49kaJkqTF8xkpZqmt00Pp8hcxP4');
+  console.log(stripe);
+  const elements = stripe.elements();//elementは支払いフォームで機密情報を収集するためのUIコンポーネント
+  const cardElement = elements.create('card');//カードトークンの作成
+  
+  cardElement.mount('#card-element');//id=card-elementに支払いフォームをマウント
+
+  const cardHolderName = document.getElementById('card-holder-name');//カード名義人のinput取得
+  const cardButton = document.getElementById('card-button');//購入ボタン取得
+
+  cardButton.addEventListener('click',async(e) => {
+    e.preventDefault()
+    const { paymentMethod, error } = await stripe.createPaymentMethod(
+      'card',cardElement, {
+        billing_datails: { name:cardHolderName.value }
+      }
+    );
+    if (error) {
+      console.log(error);
+    } else {
+      stripePaymentIdHandler(paymentMethod.id);
+    }
+  });
+  function stripePaymentIdHandler(paymentMethodId) {
+    const form = document.getElementById('setup-form');
+    const hiddenInput = document.createElement('input');
+    hiddenInput.setAttribute('type','hidden');
+    hiddenInput.setAttribute('name','paymentMethodId');
+    hiddenInput.setAttribute('value',paymentMethodId);
+    form.appendChild(hiddenInput);
+    form.submit();
+    console.log(paymentMethodId);
+  }
+
+
   const app = new Vue({
     el: '#app',
     data: {
@@ -89,6 +149,8 @@
     timeError:"{{$errors->first('time')}}",
     numberOfPeople:"{{ old('number_of_people') }}",
     numberOfPeopleError:"{{$errors->first('number_of_people')}}",
+    selectMenu:{id:'',menu:"{{ old('menu')}}", price:''},
+    selectMenuError:"{{$errors->first('menu_id')}}",
     numbers:[
       { nm:'人数', value:''},
       { nm:'1人', value:'1'},
@@ -113,7 +175,12 @@
     ],
     user: @json($user),
     item: @json($item),
+    menus:@json($menus),
     },
+    created:function(){
+      const addMenu1 = {id:0, menu_name:'席のみご予約', price:0, shop_id:0};
+      this.menus.unshift(addMenu1);
+    }
   })
 </script>
 

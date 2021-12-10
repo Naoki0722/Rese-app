@@ -7,6 +7,7 @@ use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Category;
 use App\Models\Favorite;
+use App\Models\Menu;
 use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
@@ -23,8 +24,9 @@ class ShopController extends Controller
     public function getData(Request $request)
     {
         $item = Shop::with('area','category')->find($request->id);
+        $menus = Menu::where('shop_id',$request->id)->get();
         $user = Auth::user();
         
-        return view('auth.datail',['item' => $item,'user' => $user]);
+        return view('auth.datail',['item' => $item,'user' => $user,'menus'=> $menus]);
     }
 }
