@@ -14,19 +14,18 @@ class ShopController extends Controller
 {
     public function index()
     {
-        
-        $items = Shop::with(['area','category','favorites' => function($query){
-            $query->where('user_id',Auth::id());
+        $items = Shop::with(['area','category','favorites' => function ($query) {
+            $query->where('user_id', Auth::id());
         }])->get();
         $user = Auth::user();
         return view('auth.home')->with(['items' => $items,'user' => $user]);
     }
     public function getData(Request $request)
     {
-        $item = Shop::with('area','category')->find($request->id);
-        $menus = Menu::where('shop_id',$request->id)->get();
+        $item = Shop::with('area', 'category')->find($request->id);
+        $menus = Menu::where('shop_id', $request->id)->get();
         $user = Auth::user();
         
-        return view('auth.datail',['item' => $item,'user' => $user,'menus'=> $menus]);
+        return view('auth.datail', ['item' => $item,'user' => $user,'menus'=> $menus]);
     }
 }

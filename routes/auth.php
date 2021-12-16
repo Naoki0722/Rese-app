@@ -18,7 +18,6 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/register', [RegisteredUserController::class, 'create'])
                 ->middleware('guest')
                 ->name('register');
@@ -72,49 +71,44 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->middleware('auth')
                 ->name('logout');
 
-Route::get('/datail/:{id}',[ShopController::class,'getData']);
+Route::get('/datail/:{id}', [ShopController::class,'getData']);
 
-Route::post('/reserve',[ReserveController::class,'addReserve']);
+Route::post('/reserve', [ReserveController::class,'addReserve']);
 
-Route::get('/mypage',[ReserveController::class,'myPage']);
+Route::get('/mypage', [ReserveController::class,'myPage']);
 
-Route::post('/reserved/delete/{id}',[ReserveController::class,'delete']);
+Route::post('/reserved/delete/{id}', [ReserveController::class,'delete']);
 
-Route::get('/reservationchange/{id}',[ReserveController::class,'getChange']);
+Route::get('/reservationchange/{id}', [ReserveController::class,'getChange']);
 
-Route::post('/reservationchange/{id}',[ReserveController::class,'update']);
+Route::post('/reservationchange/{id}', [ReserveController::class,'update']);
 
-Route::post('/favorite/add/{id}',[FavoriteController::class,'add']);
+Route::post('/favorite/add/{id}', [FavoriteController::class,'add']);
 
-Route::post('/favorite/delete/{id}',[FavoriteController::class,'delete']);
+Route::post('/favorite/delete/{id}', [FavoriteController::class,'delete']);
 
-Route::get('/evaluation/{id}',[EvaluationController::class,'index']);
+Route::get('/evaluation/{id}', [EvaluationController::class,'index']);
 
-Route::post('/evaluation',[EvaluationController::class,'create']);
+Route::post('/evaluation', [EvaluationController::class,'create']);
 
-Route::get('/owner/home',[OwnerController::class,'index']);
+Route::get('/owner/home', [OwnerController::class,'index']);
 
-Route::get('/admin/home',[AdminController::class,'index']);
+Route::get('/admin/home', [AdminController::class,'index']);
 
-Route::post('/addowner',[AdminController::class,'addOwner']);
+Route::post('/addowner', [AdminController::class,'addOwner']);
 
-Route::post('/shopinfocreate',[OwnerController::class,'shopCreate']);
+Route::post('/shopinfocreate', [OwnerController::class,'shopCreate']);
 
-Route::get('/shopupdate/{id}',[OwnerController::class,'shopUpdate']);
+Route::get('/shopupdate/{id}', [OwnerController::class,'shopUpdate']);
 
-Route::post('/shopupdate/{id}',[OwnerController::class,'shopInfoUpdate']);
+Route::post('/shopupdate/{id}', [OwnerController::class,'shopInfoUpdate']);
 
-Route::get('/reservationinfo/{id}',[OwnerController::class,'getReservation']);
+Route::get('/reservationinfo/{id}', [OwnerController::class,'getReservation']);
 
-Route::get('/mailform/{id}',[MailController::class,'index']);
+Route::get('/mailform/{id}', [MailController::class,'index']);
 
-Route::post('/mailconfirm',[MailController::class,'confirm']);
+Route::post('/mailconfirm', [MailController::class,'confirm']);
 
-Route::post('/sendmail',[MailController::class,'send']);
+Route::post('/sendmail', [MailController::class,'send']);
 
-Route::get('qrcode/{id}',[ReserveController::class,'showQr']);
-
-Route::post('/pay', function (Request $request){
-  $request->user()->charge($request->price, $request->paymentMethodId);
-  return redirect('/');
-});
+Route::get('qrcode/{id}', [ReserveController::class,'showQr']);

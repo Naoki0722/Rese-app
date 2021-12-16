@@ -38,5 +38,3 @@ class MailRequest extends FormRequest
         ];
     }
 }
-
-

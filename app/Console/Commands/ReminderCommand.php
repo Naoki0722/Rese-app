@@ -43,11 +43,10 @@ class ReminderCommand extends Command
     {
         $this->info('start');
         $today = Carbon::today()->format('Y-m-d');
-        $reserves = Reserve::where('date','LIKE',"%{$today}%")->with('user','shop')->get();
-        foreach($reserves as $reserve){
+        $reserves = Reserve::where('date', 'LIKE', "%{$today}%")->with('user', 'shop')->get();
+        foreach ($reserves as $reserve) {
             Mail::to($reserve->user->email)->send(new RemindMail($reserve));
         }
         $this->info('Complete');
-        
     }
 }

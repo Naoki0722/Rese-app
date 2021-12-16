@@ -264,6 +264,5 @@ class MenusTableSeeder extends Seeder
             'price' => 1000,
         ];
         DB::table('menus')->insert($param);
-
     }
 }

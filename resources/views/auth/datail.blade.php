@@ -86,48 +86,62 @@
       <p v-else class="w-2/5 md:text-center md:m-auto md:mt-20">ログインすると予約できます</p>
     </div>
   </div>
-  <div class="py-12 bg-gray-100" :class="isOpen ? 'hidden' : 'block' ">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-      <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 bg-white border-b border-gray-200">
-          <h2>購入</h2>
-          <form id="setup-form" action="/pay" method="post">
-            @csrf
-            <input type="hidden" name="price" :value="selectMenu.price">
-            <input id="card-holder-name" type="text" placeholder="カード名義人" name="card-holder-name">
-            <div id="card-element"></div>
-            <button id="card-button">購入</button>
-          </form>
-        </div>
+</div>
+<div class="py-12 bg-gray-100" :class="isOpen ? 'hidden' : 'block' ">
+  <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+      <div class="p-6 bg-white border-b border-gray-200">
+        <h2>購入</h2>
+        <form id="setup-form" action="/pay" method="post">
+          @csrf
+          {{-- <input type="hidden" name="price" :value="selectMenu.price"> --}}
+          <input type="hidden" name="price" value="20000">
+          <input id="card-holder-name" type="text" placeholder="カード名義人" name="card-holder-name">
+          <div id="card-element"></div>
+          <button id="card-button">購入</button>
+        </form>
       </div>
     </div>
   </div>
 </div>
 <script>
-  const stripe = Stripe('pk_test_51K2okKIY8x8aHGyFvsCxcICPge43IXWLRyGCrYg6Tr1gfkSQrLEX3XNKSuDlfUIdHmlGAuk49kaJkqTF8xkpZqmt00Pp8hcxP4');
-  console.log(stripe);
-  const elements = stripe.elements();//elementは支払いフォームで機密情報を収集するためのUIコンポーネント
-  const cardElement = elements.create('card');//カードトークンの作成
-  
-  cardElement.mount('#card-element');//id=card-elementに支払いフォームをマウント
+/**
+* stripeインスタンスの生成
+* 支払いフォームはstripeのUIに任せる
+* 支払い方法は一回限りの決済を利用
+*/
+const stripe = Stripe('pk_test_51I9UrdGfr486TDLv6kvnsBtlrMuR3U041eg5HmUHUSUjrUa6dgWvM5rCTRzitv3Ox4y4jix1Cb6tqtltLW2sP4mF001nJ3V5oE');
+const elements = stripe.elements();//elementは支払いフォームで機密情報を収集するためのUIコンポーネント
+const cardElement = elements.create('card');//カードトークンの作成
+cardElement.mount('#card-element');//id=card-elementに支払いフォームをマウント
+const cardHolderName = document.getElementById('card-holder-name');//カード名義人のinput取得
+const cardButton = document.getElementById('card-button');//購入ボタン取得
 
-  const cardHolderName = document.getElementById('card-holder-name');//カード名義人のinput取得
-  const cardButton = document.getElementById('card-button');//購入ボタン取得
-
-  cardButton.addEventListener('click',async(e) => {
+/**
+* 決済処理の実行
+* 購入するボタンを押したとき
+* createPaymentMethodを実行し、決済詳細を取得。
+* 成功時、コールバック関数のstripePaymentIdHandlerを呼び出す。
+*/
+cardButton.addEventListener('click',async(e) => {
     e.preventDefault()
     const { paymentMethod, error } = await stripe.createPaymentMethod(
-      'card',cardElement, {
-        billing_datails: { name:cardHolderName.value }
-      }
+        'card',cardElement, {
+        billing_details: { name:cardHolderName.value }
+        }
     );
     if (error) {
-      console.log(error);
+        console.log(error);
     } else {
-      stripePaymentIdHandler(paymentMethod.id);
+        stripePaymentIdHandler(paymentMethod.id);
     }
-  });
-  function stripePaymentIdHandler(paymentMethodId) {
+});
+
+/**
+* コールバック関数
+* input hiddenで保持しているデータを取得し、submit
+*/
+function stripePaymentIdHandler(paymentMethodId) {
     const form = document.getElementById('setup-form');
     const hiddenInput = document.createElement('input');
     hiddenInput.setAttribute('type','hidden');
@@ -136,12 +150,12 @@
     form.appendChild(hiddenInput);
     form.submit();
     console.log(paymentMethodId);
-  }
+}
 
 
-  const app = new Vue({
-    el: '#app',
-    data: {
+const app = new Vue({
+el: '#app',
+data: {
     isOpen: false,
     day:"{{ old('day') }}",
     dayError:"{{$errors->first('day')}}",
@@ -152,36 +166,36 @@
     selectMenu:{id:'',menu:"{{ old('menu')}}", price:''},
     selectMenuError:"{{$errors->first('menu_id')}}",
     numbers:[
-      { nm:'人数', value:''},
-      { nm:'1人', value:'1'},
-      { nm:'2人',value:'2'},
-      { nm:'3人',value:'3'},
-      { nm:'4人',value:'4'},
-      { nm:'5人',value:'5'},
-      { nm:'6人',value:'6'},
-      { nm:'7人',value:'7'},
-      { nm:'8人',value:'8'},
-      { nm:'9人',value:'9'},
-      { nm:'10人',value:'10'},
+        { nm:'人数', value:''},
+        { nm:'1人', value:'1'},
+        { nm:'2人',value:'2'},
+        { nm:'3人',value:'3'},
+        { nm:'4人',value:'4'},
+        { nm:'5人',value:'5'},
+        { nm:'6人',value:'6'},
+        { nm:'7人',value:'7'},
+        { nm:'8人',value:'8'},
+        { nm:'9人',value:'9'},
+        { nm:'10人',value:'10'},
     ],
     times:[
-      { tm:'時間', value:''},
-      { tm:'16:00', value:'16:00'},
-      { tm:'17:00', value:'17:00'},
-      { tm:'18:00', value:'18:00'},
-      { tm:'19:00', value:'19:00'},
-      { tm:'20:00', value:'20:00'},
-      { tm:'21:00', value:'21:00'},
+        { tm:'時間', value:''},
+        { tm:'16:00', value:'16:00'},
+        { tm:'17:00', value:'17:00'},
+        { tm:'18:00', value:'18:00'},
+        { tm:'19:00', value:'19:00'},
+        { tm:'20:00', value:'20:00'},
+        { tm:'21:00', value:'21:00'},
     ],
     user: @json($user),
     item: @json($item),
     menus:@json($menus),
-    },
-    created:function(){
-      const addMenu1 = {id:0, menu_name:'席のみご予約', price:0, shop_id:0};
-      this.menus.unshift(addMenu1);
-    }
-  })
+},
+created:function(){
+    const addMenu1 = {id:0, menu_name:'席のみご予約', price:0, shop_id:0};
+    this.menus.unshift(addMenu1);
+}
+})
 </script>
 
 @endsection

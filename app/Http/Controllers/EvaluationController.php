@@ -12,10 +12,10 @@ class EvaluationController extends Controller
 {
     public function index(Request $request)
     {
-        $items = Evaluation::where('shop_id',$request->id)->with('user')->get();
+        $items = Evaluation::where('shop_id', $request->id)->with('user')->get();
         $user = Auth::user();
         $shop = Shop::find($request->id);
-        return view('auth.evaluation',['items' => $items,'user' => $user,'shop' => $shop]);
+        return view('auth.evaluation', ['items' => $items,'user' => $user,'shop' => $shop]);
     }
 
     public function create(EvaluationRequest $request)
@@ -31,6 +31,6 @@ class EvaluationController extends Controller
         ];
         $user = Auth::user();
         Evaluation::create($form);
-        return view('auth.postingcompleted',['shop' => $shop,'user' => $user]);
+        return view('auth.postingcompleted', ['shop' => $shop,'user' => $user]);
     }
 }

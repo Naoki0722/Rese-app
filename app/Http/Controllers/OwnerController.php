@@ -11,16 +11,15 @@ use App\Models\Category;
 use App\Models\Reserve;
 use Illuminate\Support\Facades\Storage;
 
-
 class OwnerController extends Controller
 {
     public function index()
     {
         $user = Auth::user();
-        $items = Shop::where('owner_id',Auth::id())->get();
+        $items = Shop::where('owner_id', Auth::id())->get();
         $areas = Area::all();
         $categories = Category::all();
-        return view('auth.owner',['user' => $user,'items' => $items,'areas' => $areas,'categories' => $categories]);
+        return view('auth.owner', ['user' => $user,'items' => $items,'areas' => $areas,'categories' => $categories]);
     }
 
     public function shopCreate(ShopRequest $request)
@@ -37,7 +36,7 @@ class OwnerController extends Controller
         ];
         Shop::create($form);
         $user = Auth::user();
-        return view('auth.shopcreate',['user' => $user]);
+        return view('auth.shopcreate', ['user' => $user]);
     }
 
     public function shopUpdate(Request $request)
@@ -46,14 +45,14 @@ class OwnerController extends Controller
         $user = Auth::user();
         $areas = Area::all();
         $categories = Category::all();
-        return view('auth.shopupdate',['items' => $items,'user' => $user,'areas' => $areas,'categories' => $categories]);
+        return view('auth.shopupdate', ['items' => $items,'user' => $user,'areas' => $areas,'categories' => $categories]);
     }
 
     public function shopInfoUpdate(Request $request)
     {
         $shop = Shop::find($request->id);
         $img = $request->img;
-        if($img){
+        if ($img) {
             $path = Storage::disk('s3')->putFile('myprefix', $img, 'public');
             $shopImg = Storage::disk('s3')->url($path);
         } else {
@@ -67,16 +66,16 @@ class OwnerController extends Controller
             'img' => $shopImg,
             'owner_id' => $request->owner_id,
         ];
-        Shop::where('id',$request->id)->update($form);
+        Shop::where('id', $request->id)->update($form);
         $user = Auth::user();
-        return view('auth.updatecompleted',['user' => $user]);
+        return view('auth.updatecompleted', ['user' => $user]);
     }
 
     public function getReservation(Request $request)
     {
-        $items = Reserve::where('shop_id',$request->id)->with('user')->get();
+        $items = Reserve::where('shop_id', $request->id)->with('user')->get();
         $user = Auth::user();
         $shop = Shop::find($request->id);
-        return view('auth.reservationinfo',['items' => $items,'user' => $user,'shop' => $shop]);
+        return view('auth.reservationinfo', ['items' => $items,'user' => $user,'shop' => $shop]);
     }
 }
