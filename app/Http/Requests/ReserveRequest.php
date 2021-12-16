@@ -45,6 +45,4 @@ class ReserveRequest extends FormRequest
             'menu_id.required' => 'メニューを選択してください',
         ];
     }
-
-    
 }

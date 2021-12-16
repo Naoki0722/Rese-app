@@ -14,7 +14,6 @@ use Illuminate\Contracts\Mail\Mailable;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactMail;
 
-
 class MailController extends Controller
 {
     public function index(Request $request)
@@ -22,7 +21,7 @@ class MailController extends Controller
         $address = User::find($request->id);
         $user = Auth::user();
         $shopName = $request->shop_name;
-        return view('auth.mailform',['address' => $address, 'user' => $user,'shopName' => $shopName]);
+        return view('auth.mailform', ['address' => $address, 'user' => $user,'shopName' => $shopName]);
     }
 
     public function confirm(MailRequest $request)
@@ -36,8 +35,8 @@ class MailController extends Controller
         ];
         $name = $request->name;
         $user = Auth::user();
-        $request->session()->put('mail',$mail);
-        return view('auth.confirm',['name' => $name, 'mail' => $mail, 'user' => $user]);
+        $request->session()->put('mail', $mail);
+        return view('auth.confirm', ['name' => $name, 'mail' => $mail, 'user' => $user]);
     }
 
     public function send(Request $request)
@@ -46,6 +45,6 @@ class MailController extends Controller
         Mail::to($request->email)->send(new ContactMail($mail));
         $request->session()->forget('mail');
         $user = Auth::user();
-        return view('auth.sendcompletely',['user'=>$user]);
+        return view('auth.sendcompletely', ['user'=>$user]);
     }
 }

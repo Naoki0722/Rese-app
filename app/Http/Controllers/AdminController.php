@@ -7,13 +7,12 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
-
 class AdminController extends Controller
 {
     public function index()
     {
         $user = Auth::user();
-        return view('auth.admin',['user' => $user]);
+        return view('auth.admin', ['user' => $user]);
     }
 
     public function addOwner(UserRequest $request)

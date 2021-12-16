@@ -8,6 +8,7 @@ use App\Http\Controllers\ReserveController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\AdminController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,11 +32,13 @@ Route::get('/', function () {
 require __DIR__.'/auth.php';
 
 
-Route::get('/',[ShopController::class,'index']);
-Route::get('/owner/home',[OwnerController::class,'index']);
-Route::get('/admin/home',[AdminController::class,'index']);
-Route::get('reservationdatails/{id}',[ReserveController::class,'reservationDatails'])->name('reservationdatails');
+Route::get('/', [ShopController::class,'index']);
+Route::get('/owner/home', [OwnerController::class,'index']);
+Route::get('/admin/home', [AdminController::class,'index']);
+Route::get('reservationdatails/{id}', [ReserveController::class,'reservationDatails'])->name('reservationdatails');
 
-
-
-
+Route::post('/pay', function (Request $request) {
+    dd($request->all());
+    $request->user()->charge($request->price, $request->paymentMethodId);
+    return redirect('/');
+});

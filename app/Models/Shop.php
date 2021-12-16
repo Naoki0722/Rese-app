@@ -52,7 +52,7 @@ class Shop extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class,'owner_id');
+        return $this->belongsTo(User::class, 'owner_id');
     }
 
     public function menus()
